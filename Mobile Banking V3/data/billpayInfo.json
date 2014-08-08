@@ -1,0 +1,20 @@
+[
+    { 
+        "custid": 0,
+        "sessionid": 0,
+        "fromacct": "59699 - Savings Chequing - 4 CAD", 
+        "toacct": "Bell - 28873544", 
+        "schedule": "3",
+        "amount": 3126,
+        "startdate": "2012-11-20",
+        "enddate": "2014-05-20",
+        "paymentdayofweek": "2",
+        "paymentmonths": "3",
+        "paymentdayofsemimonth": "15",
+        "paymentdayofmonth": "31",
+        "frombalance": "1998.00",
+        "tobalance": "2002.00",
+        "ref":"3824287"    
+        
+    }  
+] 

@@ -4,13 +4,108 @@ body, html {
     width:100%;
 }
 
+@font-face {
+    font-family: "FontAwesome";
+    src: url("fonts/fontawesome-webfont.woff") format("woff"),
+         url("fonts/fontawesome-webfont.ttf") format("truetype");
+}
+
+.km-icon:after,
+.km-icon:before
+{
+    font: 1em/1em "FontAwesome";
+    text-align: center;
+
+}
+
+.km-home2:after,
+.km-home2:before {
+  content: "\f015";
+}
+
+.km-bank:after,
+.km-bank:before {
+  font: .8em/1em "FontAwesome";
+  padding-top: .15em;
+  content: "\f19c";
+}
+
+.km-find:after,
+.km-find:before {
+  content: "\f041";
+}
+
+#tabstrip-home .km-content{
+ 
+
+    background: #3daaf6; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #3daaf6 0%, #1163a5 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#3daaf6), color-stop(100%,#1163a5)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #3daaf6 0%,#1163a5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #3daaf6 0%,#1163a5 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #3daaf6 0%,#1163a5 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #3daaf6 0%,#1163a5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3daaf6', endColorstr='#1163a5',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+ 
+}
+
+.onethird{
+    
+min-height: 33%;
+    
+}
+
+.homeparent {
+    min-height : 100%;
+}
+
+.homechild {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 30%;
+    width: 95%;
+    max-width: 520px;
+    margin: -20% 0 0 2.5%;
+    text-align:center;
+    font-size: 1.4em;
+    font-weight:100;
+    color:White;
+}
+
+
+#tabstrip-home .mainlogo {
+    background-image:url(../images/logo_full.png);
+    background-size:100%;
+    background-repeat:no-repeat;
+    width:90%;
+    max-width: 500px;
+    height:77px;
+    margin: 0 auto;
+    /*display:inline-block;  */
+}
+
+#tabstrip-home .mainmobile {
+    background-image:url(../images/mobilebanking.png);
+    background-size:100%;
+    background-repeat:no-repeat;
+    width:90%;
+    max-width: 500px;
+    height:77px;
+    margin: 0 auto;
+    /*display:inline-block;  */
+}
+
 /* COMMON STYLES*/
 .view-content h1{
     color:#42454a;
     font-size:1.8em;
 }
 .view-content h1.welcome{
+    margin: 2px 0px;
     text-align:center;
+    font-size: 1.4em;
 }
 .view-content h3{
     color:#42454a;
@@ -31,24 +126,119 @@ body, html {
     margin:0px auto;
 }
 .logo {
-    background-image:url(../styles/images/logo.png);
+    background-image:url(../images/logo_trans_2.png);
     background-repeat:no-repeat;
-    width:85px;
-    height:60px;
-    margin:40px auto;
+    width:80px;
+    height:78px;
+    margin:0px auto;
 }
+.titlelogo {
+    background-image:url(../images/titlelogo22.png);
+    background-repeat:no-repeat;
+    min-width:22px;
+    min-height:22px;
+    display:inline-block;  
+    margin-bottom: -3px;
+}
+
+
+.titlename {
+    
+    font-weight: bold;
+}
+
+.km-ios .km-view-title {
+    font-size: 1.35em;
+    font-weight: normal;
+}
+
+.errorArea {
+    text-align: center;
+    border-radius: 6px 6px 6px 6px;
+    margin: 0.7em 0.7em;
+    padding: 0.2em 0.7em;
+    background-color: rgba(255, 0, 0, 0.1);
+    border:1px solid Red;
+    color: Black;
+    font-weight: 200;
+}
+.normalText {
+    font-weight: 200;
+}
+
+.errorBox {
+                display: -webkit-box;
+            -webkit-box-pack: center;
+            -webkit-box-align: center;
+    text-align: center;
+}
+
+.errorText {
+    font-size: 1em;
+    font-weight: 200;
+    text-align: center;
+    line-height: 1.4em;
+}
+.errorText2 {
+    font-size: .9em;
+    font-weight: 200;
+    text-align: center;
+    color:#42454a;
+    line-height: 1.3em;
+}
+.errorText3 {
+    font-size: .8em;
+    font-weight: 200;
+    text-align: center;
+    line-height: 1.2em;
+}
+
 
 /* BUTTON STYLES*/
 .buttonArea {
-    text-align: center;
+    text-align: center; 
 }
 .login-button {
     width:85%;
     max-width:300px;
     line-height:1.6em;
 }
+.std-button {
+    width:85%;
+    /*max-width:300px;*/
+    line-height:1.6em;
+}
+.third-button {
+    width:30%;
+    /*max-width:300px;*/
+
+    line-height:1em;
+    font-size: .8em;
+}
+
+.left-button {
+    width:36%;
+    left:0;
+    line-height:.9em;
+    font-size: .8em;
+    font-weight: 400;    
+    margin: 2px 7px 0 7px;
+}
+.right-button {
+    width:36%;
+    right:0;
+    line-height:.9em;
+    font-size: .8em;
+    font-weight: 400;
+    margin: 2px 7px 0 7px;
+}
 
 /* MAP STYLES*/
+
+#map {
+    width:100%; height:100%; position:absolute;        
+}
+
 #map-canvas {
     position: absolute;
     top: 0;
@@ -126,7 +316,7 @@ body, html {
     text-align:center;
 }
 .weather-info {
-    color:#fff;
+    color:#333;
     font-size: 1.2em;
     text-shadow: none;
     line-height:1.8em;
@@ -174,13 +364,418 @@ body, html {
     width:100%;
 }
 
+#horizon {
+color: white;
+text-align: center;
+visibility: visible;
+}
+
+.itemContainer {
+  position: relative;
+  width: 100%;
+  min-height: 102px;
+}
+.itemLeft {
+  position: absolute;
+  left: 0px;
+  width: 100px;
+}
+.itemSection {
+  /* position is static by default */
+  margin-left: 100px;
+  height: 100%;
+}
+
+.item-photo {
+    width: 100px;
+    height: 100px;
+    margin: .2em 0;
+    -webkit-box-shadow: 0 1px 3px #333;
+    box-shadow: 0 1px 3px #333;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+#announcements-listview .item-title {
+	float: left;
+	font-size: 1em;
+    font-weight: 100;
+    line-height: 1.2em;
+    margin: 0 0 .2em .7em;
+    color: #1266B5;
+}
+
+#announcements-listview .item-info {
+	float: left;
+	font-size: .8em;
+    font-weight: 100;
+	line-height: 1.2em;
+    margin: 0 0 0 .7em;   
+    color: #111111;
+    
+}
+
+#accounts-listview .account-title {
+	float: left;
+	font-size: 1em;
+    font-weight: 200;
+    line-height: 1.2em;
+    margin: 0;
+    color: #1266B5;
+}
+
+#accounts-listview .account-balance {
+	float: right;
+    font-weight: 100;
+    margin: 0 1.5em 0 0;   
+    
+}
+
+.banking-account-link {   
+	font-size: .8em;
+}
+
+.blue {color: #1266B5;}
+
+
+#branchesList .item-title {
+	float: left;
+	font-size: .8em;
+    line-height: 1.1em;
+    margin: 0;
+    width: 85%;
+    color: #1266B5;
+}
+
+#branchesList .item-info {
+	float: left;
+	font-size: .7em;
+    font-weight: 100;
+	line-height: 1.2em;
+    margin: 2px 0 3px 0;
+    color: #111111;
+}
+
+#branchesList {
+    margin: 0;
+}
+
+#branchesList .item-box {
+    clear:both;
+    display:inline-block;
+    width: 100%;
+    min-height: 10px;
+    margin: 0;
+    text-align:center;
+}
+
+#branchesList .item-symbols {
+    position:absolute;
+    right:0;
+    width: 40px;
+    min-height: 10px;
+    margin: 0;
+    text-align:center;
+    background-color:Aqua;
+}
+
+#historyList .km-listview-wrapper {
+     padding: 0.5em 0.1em;
+}
+
+#historyinfo .km-list>li {
+     padding: 0.5em 0.1em;
+}
+
+.km-ios .km-list>li {
+    line-height: normal;
+}
+
+.divContainer {
+    display: block;
+    width: 100%;
+}
+
+.divTitleRow {
+    display: block;
+    width: auto;
+    /*color: #1266B5;*/
+    text-align: left;
+    padding: 2px 4px;
+}
+
+.divSubRow {
+    display: block;
+    width: auto;
+    text-align: left;
+    font-size:75%;
+    padding: 2px 16px;
+}
+
+.divRow {
+    display: block;
+    width: auto;
+    text-align: left;
+    font-size:75%;
+    line-height:normal;
+}
+
+.divLeft
+{
+    float: left;
+    width: 75%;
+    display:block;
+    text-align:left;
+    font-weight:500;
+}
+.divRight
+{
+    float: right;
+    width: 25%;
+    display:block;
+    text-align: right;
+    font-weight:400; 
+}
+
+.divSubLeft
+{
+    float: left;
+    width: 40%;
+    display:block;
+    text-align:left;
+    font-size:75%;
+    font-weight:700;
+    min-height: 16px;
+}
+.divSubRight
+{
+    float: right;
+    display:block;
+    text-align: right;
+    font-weight:400; 
+    min-height: 16px; 
+}
+
+.divDescRow
+{   
+    color: #333333;
+    width: 100%; 
+    display: inline-block;
+    font-weight:bold;   
+    padding: 0em;
+    margin: 0em;
+   /*overflow: hidden; 
+   text-overflow: ellipsis; 
+   white-space:nowrap;*/
+    
+}
+
+.divDescLabel25
+{
+         float: left;
+         width: 25%;
+         display:block;
+
+         text-align:center;
+}
+
+.divDescValue25
+{
+         float: left;
+         width: 25%;
+         display:block;
+         text-align:center;
+         /*color: #1266B5;*/
+         font-weight:500;
+}
+
+.divDescAvail25
+{
+         float: left;
+         width: 25%;
+         display:block;
+         text-align:center;
+         /*color: #1266B5;*/
+         font-weight:800;
+}
+
+.hrRow
+{ 
+    display: block;
+    background-color:#666666; 
+    margin:0 0 0px 0;
+    height:1px;
+    width:100%;
+}
+
+.divRow2
+{
+        position:relative;
+         width: 100%;     
+         display: inline-block;
+         padding:0 0 5px 0;
+}
+
+.km-list .divFullRow select:not([multiple]) {
+    position:relative;
+    width:100%;
+    padding:0;
+    margin-bottom:0;
+}
+
+.divLableRow
+{
+    width: 100%; 
+    clear:both;
+}
+
+.divFullRow
+{
+        clear:both;
+         width: 100%;
+         display: block;
+         padding:0 0 1px 0;
+}
+
+.divColumn50
+{
+         float: left;
+         width: 50%;
+         display:block;
+}
+.divColumn25
+{
+         float: left;
+         width: 25%;
+         display:block;
+}
+.divColumn33
+{
+         /*float: left;*/
+         width: 33%;
+         display:block;
+}
+.divColumn30
+{
+         float: left;
+         width: 30%;
+         display:block;
+}
+.divColumn70
+{
+         float: left;
+         width: 70%;
+         display:block;
+}
+.divColumn60
+{
+         float: left;
+         width: 60%;
+         display:block;
+}
+.divColumn40
+{
+         float: left;
+         width: 40%;
+         display:block;
+}
+.divColumn10
+{
+         float: left;
+         width: 10%;
+         display:block;
+}
+
+.km-ios .hoursList>li
+{
+    font-size:90%;
+    color: #1266B5;
+    padding: 5px 10px;
+    border:0;
+}
+
+.hourItem {
+    position:absolute;
+    right:10px;
+}
+
+#modal-transferconfirm {
+    width: 90%; 
+    height: 28em;    
+}
+
+#modal-billpayconfirm {
+    width: 90%; 
+    height: 28em;    
+}
+
+#transferconfirm-button,
+#modalview-submit-button,
+#modalview-back-button {
+    display: block;
+    text-align: center;
+    margin: .6em .8em 0;
+}
+
+#billpayconfirm-button,
+#modalview-submit-button,
+#modalview-back-button {
+    display: block;
+    text-align: center;
+    margin: .6em .8em 0;
+}
+
+#list-edit-listview .delete {
+    display:none;
+    position: absolute;
+    top: .25em;
+    right: .6em;
+    width: 60px;
+    background-color: #bd2729;
+    color: #fff;
+    font-size:smaller;
+    padding:3px 6px;
+}
+
+.modalText {
+    font-size: 75%;
+    font-weight: normal;
+    text-align: center;
+}
+
+#modal-branchhours {
+    width: 95%; 
+    height: 260px;    
+}
+
+.km-listinset, .km-listgroupinset {
+   margin: .4em .7em .7em .7em;
+}
+
+.km-listgroupinset .km-group-title {
+    margin: 4px 0 0 0;
+}
+
+.km-listgroupinset .km-group-title {
+    line-height: 130%;
+}
+
+
+
+
 /* DEVICE SPECIFIC STYLES*/
+
+		/* Old Settings*/
 #skin-change{
     position: absolute;
     right: 10px;
     top: 10px;
 }
-.km-ios .km-listview-wrapper .km-listinset li{
+.km-ios .km-listinset li{
+    background-color:#fff;   
+    border-color:#ababab;
+}
+.km-ios .km-list li{
     background-color:#fff;   
     border-color:#ababab;
 }
@@ -221,9 +816,114 @@ body, html {
 
 .km-ios .km-list > li,
 .km-flat .km-list>li {
-    background:none;
-    border:none;
+    /*background:none;
+    border:none; */
 }
+   /* new styles from Theme Builder */
+
+.km-ios7 .km-view .km-tabstrip .km-state-active span.km-icon {
+    color: rgb(17, 99, 165);
+}
+.km-ios7 .km-view .km-navbar .km-button .km-text {
+    color: rgb(17, 99, 165);
+}
+.km-android .km-view .km-content .km-list .km-state-active .km-listview-link {
+    background-color: rgb(17, 99, 165);
+}
+.km-android .km-view .km-tabstrip .km-state-active span.km-icon {
+    color: rgb(61, 170, 246);
+}
+.km-android .km-view .km-navbar .km-button.km-state-active {
+    background-color: rgb(17, 99, 165);
+}
+.km-android .km-view .km-navbar .km-button .km-text {
+    color: rgb(17, 99, 165);
+}
+shim, .km-android .km-popup, .km-android .k-slider, .km-android .km-badge, .km-android .km-switch-on, .km-android .km-current-page, .km-android input:focus, .km-android select:focus, .km-android textarea:focus, .km-android input:checked, .km-android .km-touch-scrollbar, .km-android .km-widget .k-state-focused, .km-android .km-widget .km-state-active {
+	color: rgb(61, 170, 246);
+}
+.km-android .view-content p, .km-android .view-content h3 {
+	color: rgb(61, 170, 246);
+}
+.km-android .km-view .km-content .km-listgroupinset .km-group-title {
+    color: rgba(255, 255, 255, 0.6);
+}
+.km-android #announcements-listview .item-info {
+    color: rgb(204, 204, 204);
+}
+.km-android .km-view .km-navbar .km-button.km-state-active {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.km-android .km-view .km-navbar .km-button .km-text {
+    color: rgb(61, 170, 246);
+}
+.km-wp .km-view .km-content {
+    background-color: rgb(245, 245, 245);
+}
+.km-wp .km-view .km-content .km-list .km-state-active .km-listview-link {
+    background-color: rgb(255, 255, 255);
+}
+.km-wp .km-view .km-content .km-list .km-state-active .km-listview-link .km-icon {
+    color: rgb(0, 0, 0);
+}
+.km-wp .km-view .km-navbar {
+    background-color: rgb(178, 178, 178);
+}
+.km-wp .km-view .km-navbar .km-button.km-state-active {
+    background-color: rgb(17, 99, 165);
+}
+.km-wp .km-view .km-content .km-button.km-state-active {
+    background-color: rgb(17, 99, 165);
+}
+.km-flat .km-view .km-content .km-list .km-state-active .km-listview-link {
+    background-color: rgb(17, 99, 165);
+}
+.km-flat .km-view .km-navbar .km-button.km-state-active {
+    background-color: rgb(17, 99, 165);
+}
+.km-flat .km-view .km-tabstrip .km-button.km-state-active {
+    background-color: rgb(17, 99, 165);
+}
+.km-flat .km-view .km-content .km-button.km-state-active {
+    background-color: rgb(17, 99, 165);
+}
+
+.km-flat .km-switch-handle,
+.km-flat .k-slider-selection,
+.km-flat .km-switch-background
+{
+    color: rgb(17, 99, 165);
+}
+
+.km-flat .km-loader,
+.km-flat .km-rowinsert,
+.km-flat .km-state-active,
+.km-flat .km-scroller-pull,
+.km-flat .k-slider-selection,
+.km-flat .km-touch-scrollbar,
+.km-flat .km-pages .km-current-page,
+.km-flat .k-slider .k-draghandle,
+.km-flat .k-slider .k-draghandle:hover,
+.km-flat .km-tabstrip .km-state-active,
+.km-flat .km-scroller-refresh.km-load-more,
+.km-flat .km-popup .k-state-hover,
+.km-flat .km-popup .k-state-focused,
+.km-flat .km-popup .k-state-selected,
+.km-flat .km-actionsheet > li > a:active,
+.km-flat .km-actionsheet > li > a:hover,
+.km-flat li.km-state-active .km-listview-link,
+.km-flat li.km-state-active .km-listview-label,
+.km-flat .km-listview-label input[type=radio]:checked,
+.km-flat .km-listview-label input[type=checkbox]:checked
+{
+    background: rgb(17, 99, 165);
+}
+
+.km-flat .km-filter-wrap > input:focus
+{
+    border-color: rgb(17, 99, 165);
+}
+
 
 /* Separator Style*/
 .separator > .dark {
@@ -251,6 +951,8 @@ body, html {
     opacity:0.3;
 }
 
+
+
 /* RETINA DISPLAY STYLES*/
 @media only screen and (-webkit-min-device-pixel-ratio: 2),(min-resolution: 192dpi) {
     .img {
@@ -259,7 +961,7 @@ body, html {
         background-size:100%;
     }
     .logo {
-        background-image:url(../styles/images/logo2x.png);
+        background-image:url(../images/logo_trans_2.png);
         background-repeat:no-repeat;
         background-size:100%;
     }

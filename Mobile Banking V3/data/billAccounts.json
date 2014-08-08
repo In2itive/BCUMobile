@@ -1,0 +1,8 @@
+[
+  { "id":"Choose a Vendor", "name":"Choose a Vendor", "vendor":"Choose a Vendor", "number":"", "nickname":"" },
+  { "id":"Amex - 364583991293", "name":"Amex - 364583991293", "vendor":"Amex", "number":"364583991293", "nickname":"My Amex" },  
+  { "id":"Bell - 28873544", "name":"Bell - 28873544", "vendor":"Bell", "number":"28873544", "nickname":"Bell Home Phone" },  
+  { "id":"Sears Card - 567823451234", "name":"Sears Card - 567823451234", "vendor":"Sears Card", "number":"567823451234", "nickname":"" },  
+  { "id":"Toronto Taxes - 73625704", "name":"Toronto Taxes - 73625704", "vendor":"Toronto Taxes", "number":"73625704", "nickname":"Primary Taxes" },  
+  { "id":"Veridian - 1234567", "name":"Veridian - 1234567", "vendor":"Veridian", "number":"1234567", "nickname":"House Power" }
+]

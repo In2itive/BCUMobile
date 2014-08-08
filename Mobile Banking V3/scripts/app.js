@@ -3,7 +3,10 @@
         app = global.app = global.app || {};
 
     document.addEventListener("deviceready", function () {
+        
         app.application = new kendo.mobile.Application(document.body, { layout: "tabstrip-layout" });
+        app.application.skin("flat");
+        
     }, false);
 
     app.changeSkin = function (e) {
@@ -18,4 +21,10 @@
 
         app.application.skin(mobileSkin);
     };
+    
+    app.errorObj = {errorCode: 0, errorStr: "", errorStr2: "", errorStr3: "", errorCancel: "", errorBack: "", errorLogin: ""}
+    
+    app.testshow = function (e) {
+        console.log("testshow has run");
+    }
 })(window);

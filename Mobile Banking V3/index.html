@@ -10,10 +10,23 @@
         <script src="kendo/js/jquery.min.js"></script>
         <script src="kendo/js/kendo.mobile.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true"></script>
-
+        
+        <script src="scripts/config.js"></script>
         <script src="scripts/login.js"></script>
         <script src="scripts/location.js"></script>
+        <script src="scripts/announcements.js"></script>
+        <script src="scripts/bankingaccounts.js"></script>
+        <script src="scripts/bankinghistory.js"></script>
+        <script src="scripts/bankingtransfer.js"></script>
+        <script src="scripts/bankingbillpay.js"></script>
+        <script src="scripts/bankingscheduled.js"></script>        
+        <script src="scripts/bankingstatement.js"></script>
+        <script src="scripts/bankingstatementhistory.js"></script>
+        <script src="scripts/bankingvendors.js"></script>
+        <script src="scripts/bankingpassword.js"></script>
         <script src="scripts/weather.js"></script>
+        <script src="scripts/error.js"></script>
+        <script src="scripts/utils.js"></script>
         <script src="scripts/app.js"></script>
 
     </head>
@@ -21,76 +34,1021 @@
         <!--Home-->
         <div id="tabstrip-home" 
              data-role="view"  
-             data-title="Home">
+             data-title="Home"
+             data-model="app.announcementService.viewModel"
+            data-stretch="true">
 
+            <header data-role="header">
+
+            </header>
+            
             <div class="view-content">
-                <h1>Welcome!</h1>
-                <a id="skin-change" data-role="button" data-click="app.changeSkin">Flat</a>
-                <p>
-                    Icenium&trade; enables you to build cross-platform device applications regardless of your
-                    development platform by combining the convenience of a local development toolset with the
-                    power and flexibility of the cloud.
-                </p>
-                <div class="img"></div>
-            </div>
-        </div>
+                <div class="onethird">
+                     <!--a id="skin-change" data-role="button" data-click="app.changeSkin">Flat</a-->
+                </div>
+                        
+                <div class="homechild">
+                    <div class="mainlogo"></div>
+                    <div class="mainmobile"></div>
+                </div>
 
+                
+               
+                <!--ul data-role="listview" id="announcements-listview" 
+					data-style="inset"  data-template="announcement-listview-template" data-bind="source: announcementsDataSource">
+				</ul-->
+            </div>   
+            
+            
+        </div>
+        
+    	<!-- Home templates -->
+		<script type="text/x-kendo-template" id="announcement-listview-template">
+            <div class="itemContainer">
+
+                <div class="itemLeft">
+                    <img class="item-photo" src="${url}" />
+                </div>
+                <div class="itemSection">
+            		<h3 class="item-title">${title}</h3>
+			        <p class="item-info">${description}</p>
+                </div>
+
+
+            </div>
+		</script>  
+        
         <!--Login-->
         <div id="tabstrip-login" 
              data-role="view"  
-             data-title="Login" 
+             data-title="Banking" 
              data-model="app.loginService.viewModel">
 
             <div class="view-content">
                 <div class="logo"></div>
-                <h3 data-bind="invisible: isLoggedIn">Enter your credentials:</h3>
-                <h1 class="welcome" data-bind="visible: isLoggedIn">
-                    Welcome, <span data-bind="text: username"></span>!
-                </h1>
+                <h3 data-bind="invisible: isLoggedIn">Enter your login information:</h3>
+                <h3 class="welcome" data-bind="visible: isLoggedIn">Select Banking Function:</h3>
 
                 <ul data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
                     <li>
-                        <label>
-                            Username
-                            <input type="text" data-bind="value: username"/>
+                        <label >
+                            <div style="width:50%">
+                            ID <span class="normalText" style="float:right">5818280675</span>
+                            </div>
+                            <input type="text" data-bind="value: CustID"/>
+                            
                         </label>
                     </li>
                     <li>
                         <label>
                             Password
-                            <input type="password" data-bind="value: password" />
+                            <input type="password" data-bind="value: passwd" />
                         </label>
                     </li>
                 </ul>
 
                 <div class="buttonArea">
                     <a id="login" data-role="button" data-bind="click: onLogin, invisible: isLoggedIn" class="login-button">Login</a>
-                    <a id="logout" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" class="login-button">Logout</a>
-                </div>
+                 </div>
+                
+				<div class="errorArea" data-bind="visible: ErrorMessage">
+                	<span data-bind="text: ErrorMessage"></span>
+				</div>
+               
+                <ul data-role="listview" data-style="inset" data-auto-bind="false" data-bind="visible: isLoggedIn">
+                    <li>
+                        <a href="#tabstrip-accounts">My Accounts</a>
+                    </li>
+                    <li>
+                        <a href="#tabstrip-transfer">Transfer</a>
+                    </li>
+                    <li>
+                        <a href="#tabstrip-billpay">Bill Payments</a>
+                    </li>
+                    <li>
+                        <a href="#tabstrip-scheduled">Scheduled Items</a>
+                    </li>
+                </ul>
+                
+                <div class="buttonArea"> 
+                    <a id="setbillaccounts" data-role="button" href="#tabstrip-vendor" data-bind="visible: isLoggedIn" class="std-button">Set Bill Accounts</a>
+                    <a id="changepassword" data-role="button" href="#tabstrip-password" data-bind="visible: isLoggedIn" class="std-button">Change Password</a>
+                    <a id="logout" data-role="button" data-bind="click: onLogout, visible: isLoggedIn" class="std-button">Logout</a>
+                </div>         
             </div>
 
         </div>
+        <div id="tabstrip-accounts"
+             data-role="view"  
+             data-title="Accounts"
+             data-model="app.bankingAccountsService.viewModel"
+             data-show="app.bankingAccountsService.viewModel.beforeshow"       
+            >
+            
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton" id="accthistback">Back</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+            
+            <div class="view-content">
+                <ul id="accounts-listview" 
+                    data-role="listview" 
+                    data-bind="source: bankingAccountsDataSource" 
+                    data-template="account-listview-template" 
+                    data-style="inset" 
+                    data-auto-bind="false" 
+                    data-click="app.bankingAccountsService.viewModel.accountClick">
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Account View templates -->
+        <script type="text/x-kendo-template" id="account-listview-template">
+            <a class="banking-account-link" href="\#tabstrip-history">
+                <span>${product} </span>
+                <span class="account-balance">
+                  ${balance}
+                </span>
+            </a>
+        </script>
+        
+        
+        <div id="tabstrip-history"
+             data-role="view"  
+             data-title="History"
+             data-auto-bind="false"
+             data-model="app.bankingHistoryService.viewModel"
+             data-show="app.bankingHistoryService.viewModel.beforeshow"
+            >
+          
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton" id="accthistback">Back</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                </div>
+            </header>
+            
+            <div data-role="content">        
+                <div class="historyinfo">
+                    <div id="historyinfo-listview" data-role="listview" data-auto-bind="false" data-bind="source: bankingHistoryInfoDataSource" data-template="historyinfo-listview-template"></div>
+                </div>
+                 <div id="history">    
+                     <div class="divTitleRow" style="font-size: larger; padding-left .3em">Recent Transactions</div> 
+                    <ul id="history-listview" data-role="listview" data-auto-bind="false" data-bind="source: bankingHistoryDataSource" data-template="history-listview-template" data-header-template="history-header-template" data-style="inset"></ul>
+                </div>
+            </div> 
+        </div>
+        
+        <!-- History View templates -->
+        <script type="text/x-kendo-template" id="history-listview-template">
+            <span class="divRow">            	
+                <div class="divLeft">${description}</div>
+                <div class="divRight">${amount}</div>
+            </span>
+        </script>
+        
+        <script type="text/x-kendo-template" id="history-header-template">
+             #= kendo.toString(kendo.parseDate(value, 'yyyy-MM-dd'), 'd MMM, yyyy') #
+        </script>    
 
+        <script type="text/x-kendo-template" id="historyinfo-listview-template">
+            #if (group === 'Demand')  { #
+                <div class="divTitleRow">Account
+                    <div class="divSubRight">${product}</div>
+                </div>
+                <div class="divSubRow">Credit Line
+                    <div class="divSubRight">${loc}</div>
+                </div>
+                <div class="divSubRow">Holds
+                    <div class="divSubRight">${hold}</div>
+                </div>
+                <div class="divSubRow">Balance
+                    <div class="divSubRight">${ledger}</div>
+                </div>
+                <div class="divSubRow">Available
+                    <div class="divSubRight">${balance}</div>
+                </div>
+            # } else if (group === 'Term')  { #
+                <div class="divTitleRow">Account
+                    <div class="divSubRight">${product}</div>
+                </div>
+                <div class="divSubRow">Maturity Date
+                    <div class="divSubRight">${matdate}</div>
+                </div>
+                <div class="divSubRow">Interest Rate
+                    <div class="divSubRight">${intrate}</div>
+                </div>
+                <div class="divSubRow">Next Interest
+                    <div class="divSubRight">${intdate}</div>
+                </div>
+                <div class="divSubRow">Balance
+                    <div class="divSubRight">${balance}</div>
+                </div>    
+            # } else if (group === 'Loan')  { #
+                <div class="divTitleRow">Account
+                    <div class="divSubRight">${product}</div>
+                </div>
+                <div class="divSubRow">Next Payment
+                    <div class="divSubRight">${paydate}</div>
+                </div>
+                <div class="divSubRow">Interest Rate
+                    <div class="divSubRight">${intrate}</div>
+                </div>
+                <div class="divSubRow">Payment Amount
+                    <div class="divSubRight">${payment}</div>
+                </div>
+                <div class="divSubRow">Balance
+                    <div class="divSubRight">${balance}</div>
+                </div>               
+            # } # 
+
+        </script>
+       
+ 
+        
+        <div id="tabstrip-transfer"
+             data-role="view"  
+             data-title="Transfer"
+             data-auto-bind="false" 
+             data-init="app.bankingTransferService.init" 
+             data-before-show="app.bankingTransferService.beforeShow"
+             data-model="app.bankingTransferService.viewModel">
+            
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                </div>
+            </header>                
+            
+            <div class="view-content">          
+                 
+            <ul data-role="listview" data-auto-bind="false" data-style="inset">
+                <li>   
+                    <label for="fromaccount">From Account:</label>    
+                    <div class="divFullRow">
+                        <select id="fromaccount" name="fromaccount" data-text-field="name" data-value-field="id" data-bind="source: fromAccounts, value: transferInfo.data()[0].fromacct" required="required" class="fullSelect">
+                        </select> 
+                    </div>
+                </li>
+                <li>
+                    <div class="divFullRow">
+                        <label for="toaccount">To Account:</label>  
+                    </div>
+                    <div class="divFullRow">
+                        <select id="toaccount" name="toaccount" data-text-field="name" data-value-field="id" data-bind="source: toAccounts, value: transferInfo.data()[0].toacct" required="required" class="fullSelect">
+                        </select> 
+                    </div>
+                </li>               
+                <li>
+                    <label for="Schedule">Schedule Type:</label>           
+                    <select id='transferSchedule' name='Schedule' data-bind="value: transferInfo.data()[0].schedule" onchange='javascript:app.bankingTransferService.formdisp(this)'> 
+                        <option value='0' selected>Onetime</option>
+                        <option value='1'>Weekly</option>
+                        <option value='2'>Bi-weekly</option>
+                        <option value='3'>Semi-monthly</option>
+                        <option value='4'>Monthly</option>
+                        <option value='5'>Bi-monthly</option>
+                        <option value='6'>Quarterly</option>
+                        <option value='7'>Yearly</option>       
+                    </select>
+                </li>
+                <li>                           
+                    <label for="amount">Amount:</label> 
+                    <input type="number" id="amount" name="amount" data-bind="value: transferInfo.data()[0].amount" />                   
+                </li>
+                <li>
+                    <label for="startdate"><span id="LayerStart">Start </span>Date:</label> 
+                    <input type="date" id="startdate" name="startdate" data-bind="value: transferInfo.data()[0].startdate" required="required" />
+                </li>
+                <li id="LayerEndDate">
+                    <label for="Month2">End Date:</label> 
+                    <input type="date" id="Month2" name="Month2" data-bind="value: transferInfo.data()[0].enddate" required="required" />                    
+                </li>
+                <li id="LayerDOW">
+                        <label for="DOW">Payment Day:</label> 
+                        <select id='DOW' name='DOW' class='ctrl' data-bind="value: transferInfo.data()[0].paymentdayofweek" >
+                            <option value='0' selected>Sunday</option>
+                            <option value='1'>Monday</option>
+                            <option value='2'>Tuesday</option>
+                            <option value='3'>Wednesday</option>
+                            <option value='4'>Thursday</option>
+                            <option value='5'>Friday</option>
+                            <option value='6'>Saturday</option>
+                        </select>                    
+                </li>
+                <li id="LayerMonths">
+                    <label for="Months">Payment Months:</label> 
+                	<select id='Months' name='Months' class='ctrl' data-bind="value: transferInfo.data()[0].paymentmonths" >
+                		<option value='0' selected>Jan</option>
+                		<option value='1'>Feb</option>
+                		<option value='2'>Mar</option>
+                		<option value='3'>Apr</option>
+                		<option value='4'>May</option>
+                		<option value='5'>Jun</option>
+                		<option value='6'>Jul</option>
+                		<option value='7'>Aug</option>
+                		<option value='8'>Sep</option>
+                		<option value='9'>Oct</option>
+                		<option value='10'>Nov</option>
+                		<option value='11'>Dec</option>
+                	</select>
+                </li>
+                <li id="LayerSDOM">
+                    <label for="SDOM">Payment Day:</label> 
+                	<select id='SDOM' name='SDOM' data-bind="value: transferInfo.data()[0].paymentdayofsemimonth" >
+                		<option value='01'>01</option>
+                		<option value='02'>02</option>
+                		<option value='03'>03</option>
+                		<option value='04'>04</option>
+                		<option value='05'>05</option>
+                		<option value='06'>06</option>
+                		<option value='07'>07</option>
+                		<option value='08'>08</option>
+                		<option value='09'>09</option>
+                		<option value='10'>10</option>
+                		<option value='11'>11</option>
+                		<option value='12'>12</option>
+                		<option value='13'>13</option>
+                		<option value='14'>14</option>
+                		<option value='15'>15</option>
+                		<option value='16'>16</option>
+                		<option value='17'>17</option>
+                		<option value='18'>18</option>
+                		<option value='19'>19</option>
+                		<option value='20'>20</option>
+                		<option value='21'>21</option>
+                		<option value='22'>22</option>
+                		<option value='23'>23</option>
+                		<option value='24'>24</option>
+                		<option value='25'>25</option>
+                		<option value='26'>26</option>
+                		<option value='27'>27</option>
+                		<option value='28'>28</option>
+                		<option value='29'>29</option>
+                		<option value='30' selected>30</option>
+                		<option value='31'>31</option>
+                	</select>
+                </li>               
+                <li id="LayerDOM">
+                    <div class="divRow2">
+                        <label for="DOM">Payment Day:</label> 
+                    	<select id='DOM' name='DOM' data-bind="value: transferInfo.data()[0].paymentdayofmonth" >
+                    		<option value='01'>01</option>
+                    		<option value='02'>02</option>
+                    		<option value='03'>03</option>
+                    		<option value='04'>04</option>
+                    		<option value='05'>05</option>
+                    		<option value='06'>06</option>
+                    		<option value='07'>07</option>
+                    		<option value='08'>08</option>
+                    		<option value='09'>09</option>
+                    		<option value='10'>10</option>
+                    		<option value='11'>11</option>
+                    		<option value='12'>12</option>
+                    		<option value='13'>13</option>
+                    		<option value='14'>14</option>
+                    		<option value='15'>15</option>
+                    		<option value='16'>16</option>
+                    		<option value='17'>17</option>
+                    		<option value='18'>18</option>
+                    		<option value='19'>19</option>
+                    		<option value='20'>20</option>
+                    		<option value='21'>21</option>
+                    		<option value='22'>22</option>
+                    		<option value='23'>23</option>
+                    		<option value='24'>24</option>
+                    		<option value='25'>25</option>
+                    		<option value='26'>26</option>
+                    		<option value='27'>27</option>
+                    		<option value='28'>28</option>
+                    		<option value='29'>29</option>
+                    		<option value='30'>30</option>
+                    		<option value='31' selected>31</option>
+                    	</select>
+                    </div>
+                    <p class="more-info">Set the day to 31 to have the transation effective the last day of the month.</p>
+                </li>                
+                <li>
+                    <label>End of Month</label>
+                    <input type="checkbox"  data-off-label="No" data-on-label="Yes" />
+                </li>
+                     
+            </ul>
+            <a data-role="button" data-rel="modalview" data-click="app.bankingTransferService.checkTransfer" id="transferconfirm-button">Continue</a>
+            </div>           
+        </div>
+        
+        <div id="modal-transferconfirm"
+             data-role="modalview"  
+             data-title="Confirm Transfer"
+             data-open="app.bankingTransferService.confirmString"
+             data-model="app.bankingTransferService.viewModel"
+             >        
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>Confirm</span>
+                </div>
+            </div>
+            <div id="transferconfirm-listview" data-role="listview" data-bind="source: transferInfo" data-template="transferConfirm-listview-template" data-style="inset"></div>            
+            <a data-click="app.bankingTransferService.submitTransferconfirm" id="modalview-submit-button" type="button" data-role="button">Submit</a>
+            <a data-click="app.bankingTransferService.closeTransferconfirm" id="modalview-back-button" type="button" data-role="button">Back</a>
+        </div> 
+        
+		<script type="text/x-kendo-template" id="transferConfirm-listview-template">
+            <p class="modalText">
+                <span id="transferConfirm" name="transferConfirm"></span>
+            </p>
+            
+		</script>    
+        
+        <div id="tabstrip-transferposted"
+             data-role="view"  
+             data-title="Bill Payment"
+             data-init="app.bankingTransferService.postedString"
+             data-model="app.bankingTransferService.viewModel">
+            
+            <div class="view-content">          
+                 
+
+            <div id="transferconfirm-listview" data-role="listview" data-bind="source: transferInfo" data-template="transferPosted-listview-template" data-style="inset"></div>            
+                <div class="buttonArea">     
+                    <a data-role="button" href="#tabstrip-login" class="std-button">Continue</a>
+                </div>
+            
+            </div>
+        </div>
+                
+		<script type="text/x-kendo-template" id="transferPosted-listview-template">
+            <p class="modalText">
+                <span id="transferMessage" name="transferMessage"></span>
+                <br />
+            </p>
+            
+		</script>    
+        
+        <div id="tabstrip-scheduled"
+             data-role="view"  
+             data-title="Scheduled"
+             data-model="app.bankingScheduledService.viewModel"
+             data-show="app.bankingScheduledService.viewModel.beforeshow"
+            >
+
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                </div>
+            </header> 
+            
+            <div class="view-content">
+                <ul id="scheduled-listview" 
+                    data-role="listview" 
+                    data-bind="source: bankingScheduledDataSource" 
+                    data-template="scheduled-listview-template" 
+                    data-style="inset" 
+                    data-auto-bind="false" 
+                    data-click="app.bankingScheduledService.viewModel.scheduledClick">
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Scheduled View templates -->
+        <script type="text/x-kendo-template" id="scheduled-listview-template">
+            <a class="banking-account-link">
+                <span class="blue">${toacct}</span><br>
+                <div class="account-balance">
+                  ${schedule} for ${amount}
+                </div>
+            </a>
+        </script>
+        
+        <div id="tabstrip-billpay"
+             data-role="view"  
+             data-title="BillPay"
+             data-auto-bind="false" 
+             data-init="app.bankingBillPayService.init" 
+             data-before-show="app.bankingBillPayService.beforeShow"
+             data-model="app.bankingBillPayService.viewModel">
+ 
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton">Back</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                </div>
+            </header> 
+            
+            <div class="view-content">          
+                 
+            <ul id="tabstrip-billpay-listview" data-role="listview" data-auto-bind="false" data-style="inset">
+                <li>   
+                    <label for="fromaccount">From Account:</label>    
+                    <div class="divFullRow">
+                        <select id="fromaccount" name="fromaccount" data-text-field="name" data-value-field="id" data-bind="source: fromAccounts, value: billpayInfo.data()[0].fromacct" required="required" class="fullSelect">
+                        </select> 
+                    </div>
+                </li>
+                <li>
+                    <div class="divFullRow">
+                        <label for="toaccount">To Account:</label>  
+                    </div>
+                    <div class="divFullRow">
+                        <select id="toaccount" name="toaccount" data-text-field="name" data-value-field="id" data-bind="source: toAccounts, value: billpayInfo.data()[0].toacct" required="required" class="fullSelect">
+                        </select> 
+                    </div>
+                </li>               
+                <li>
+                    <label for="Schedule">Schedule Type:</label>           
+                    <select id='billpaySchedule' name='Schedule' data-bind="value: billpayInfo.data()[0].schedule" onchange='javascript:app.bankingBillPayService.formdisp(this)'> 
+                        <option value='0' selected>Onetime</option>
+                        <option value='1'>Weekly</option>
+                        <option value='2'>Bi-weekly</option>
+                        <option value='3'>Semi-monthly</option>
+                        <option value='4'>Monthly</option>
+                        <option value='5'>Bi-monthly</option>
+                        <option value='6'>Quarterly</option>
+                        <option value='7'>Yearly</option>       
+                    </select>
+                </li>
+                <li>                           
+                    <label for="amount">Amount:</label> 
+                    <input type="number" id="amount" name="amount" data-bind="value: billpayInfo.data()[0].amount" />                   
+                </li>
+                <li>
+                    <label for="startdate"><span id="LayerStart_b">Start </span>Date:</label> 
+                    <input type="date" id="startdate" name="startdate" data-bind="value: billpayInfo.data()[0].startdate" required="required" />
+                </li>
+                <li id="LayerEndDate_b">
+                    <label for="Month2">End Date:</label> 
+                    <input type="date" id="Month2" name="Month2" data-bind="value: billpayInfo.data()[0].enddate" required="required" />                    
+                </li>
+                <li id="LayerDOW_b">
+                        <label for="DOW">Payment Day:</label> 
+                        <select id='DOW' name='DOW' class='ctrl' data-bind="value: billpayInfo.data()[0].paymentdayofweek" >
+                            <option value='0' selected>Sunday</option>
+                            <option value='1'>Monday</option>
+                            <option value='2'>Tuesday</option>
+                            <option value='3'>Wednesday</option>
+                            <option value='4'>Thursday</option>
+                            <option value='5'>Friday</option>
+                            <option value='6'>Saturday</option>
+                        </select>                    
+                </li>
+                <li id="LayerMonths_b">
+                    <label for="Months">Payment Months:</label> 
+                	<select id='Months' name='Months' class='ctrl' data-bind="value: billpayInfo.data()[0].paymentmonths" >
+                		<option value='0' selected>Jan</option>
+                		<option value='1'>Feb</option>
+                		<option value='2'>Mar</option>
+                		<option value='3'>Apr</option>
+                		<option value='4'>May</option>
+                		<option value='5'>Jun</option>
+                		<option value='6'>Jul</option>
+                		<option value='7'>Aug</option>
+                		<option value='8'>Sep</option>
+                		<option value='9'>Oct</option>
+                		<option value='10'>Nov</option>
+                		<option value='11'>Dec</option>
+                	</select>
+                </li>
+                <li id="LayerSDOM_b">
+                    <label for="SDOM">Payment Day:</label> 
+                	<select id='SDOM' name='SDOM' data-bind="value: billpayInfo.data()[0].paymentdayofsemimonth" >
+                		<option value='01'>01</option>
+                		<option value='02'>02</option>
+                		<option value='03'>03</option>
+                		<option value='04'>04</option>
+                		<option value='05'>05</option>
+                		<option value='06'>06</option>
+                		<option value='07'>07</option>
+                		<option value='08'>08</option>
+                		<option value='09'>09</option>
+                		<option value='10'>10</option>
+                		<option value='11'>11</option>
+                		<option value='12'>12</option>
+                		<option value='13'>13</option>
+                		<option value='14'>14</option>
+                		<option value='15'>15</option>
+                		<option value='16'>16</option>
+                		<option value='17'>17</option>
+                		<option value='18'>18</option>
+                		<option value='19'>19</option>
+                		<option value='20'>20</option>
+                		<option value='21'>21</option>
+                		<option value='22'>22</option>
+                		<option value='23'>23</option>
+                		<option value='24'>24</option>
+                		<option value='25'>25</option>
+                		<option value='26'>26</option>
+                		<option value='27'>27</option>
+                		<option value='28'>28</option>
+                		<option value='29'>29</option>
+                		<option value='30' selected>30</option>
+                		<option value='31'>31</option>
+                	</select>
+                </li>               
+                <li id="LayerDOM_b">
+                    <div class="divRow2">
+                        <label for="DOM">Payment Day:</label> 
+                    	<select id='DOM' name='DOM' data-bind="value: billpayInfo.data()[0].paymentdayofmonth" >
+                    		<option value='01'>01</option>
+                    		<option value='02'>02</option>
+                    		<option value='03'>03</option>
+                    		<option value='04'>04</option>
+                    		<option value='05'>05</option>
+                    		<option value='06'>06</option>
+                    		<option value='07'>07</option>
+                    		<option value='08'>08</option>
+                    		<option value='09'>09</option>
+                    		<option value='10'>10</option>
+                    		<option value='11'>11</option>
+                    		<option value='12'>12</option>
+                    		<option value='13'>13</option>
+                    		<option value='14'>14</option>
+                    		<option value='15'>15</option>
+                    		<option value='16'>16</option>
+                    		<option value='17'>17</option>
+                    		<option value='18'>18</option>
+                    		<option value='19'>19</option>
+                    		<option value='20'>20</option>
+                    		<option value='21'>21</option>
+                    		<option value='22'>22</option>
+                    		<option value='23'>23</option>
+                    		<option value='24'>24</option>
+                    		<option value='25'>25</option>
+                    		<option value='26'>26</option>
+                    		<option value='27'>27</option>
+                    		<option value='28'>28</option>
+                    		<option value='29'>29</option>
+                    		<option value='30'>30</option>
+                    		<option value='31' selected>31</option>
+                    	</select>
+                    </div>
+                    <p class="more-info">Set the day to 31 to have the transation effective the last day of the month.</p>
+                </li>                
+                <li>
+                    <label>End of Month</label>
+                    <input type="checkbox"  data-off-label="No" data-on-label="Yes" />
+                </li>
+                     
+            </ul>
+            <a data-role="button" data-rel="modalview" data-click="app.bankingBillPayService.checkBillPay" id="billpayconfirm-button">Continue</a>
+            </div>           
+        </div>
+
+        <div id="modal-billpayconfirm"
+             data-role="modalview"  
+             data-title="Confirm Bill Payment"
+             data-open="app.bankingBillPayService.confirmString"
+             data-model="app.bankingBillPayService.viewModel"
+             >        
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>Confirm</span>
+                </div>
+            </div>
+            <div id="billpayconfirm-listview" data-role="listview" data-bind="source: billpayInfo" data-template="billpayConfirm-listview-template" data-style="inset"></div>            
+            <a data-click="app.bankingBillPayService.submitBillPayconfirm" id="modalview-submit-button" type="button" data-role="button">Submit</a>
+            <a data-click="app.bankingBillPayService.closeBillPayconfirm" id="modalview-back-button" type="button" data-role="button">Back</a>
+        </div> 
+        
+		<script type="text/x-kendo-template" id="billpayConfirm-listview-template">
+            <p class="modalText">
+                <span id="billpayConfirm" name="billpayConfirm"></span>
+            </p>
+            
+		</script>    
+        
+        <div id="tabstrip-billpayposted"
+             data-role="view"  
+             data-title="Bill Payment"
+             data-init="app.bankingBillPayService.postedString"
+             data-model="app.bankingBillPayService.viewModel">
+            
+            <div class="view-content">          
+                 
+
+            <div id="billpayconfirm-listview" data-role="listview" data-bind="source: billpayInfo" data-template="billpayPosted-listview-template" data-style="inset"></div>            
+                <div class="buttonArea">     
+                    <a data-role="button" href="#tabstrip-login" class="std-button">Continue</a>
+                </div>
+            
+            </div>
+        </div>
+                
+		<script type="text/x-kendo-template" id="billpayPosted-listview-template">
+            <p class="modalText">
+                <span id="billpayMessage" name="billpayMessage"></span>
+                <br />
+            </p>
+            
+		</script>        
+
+        <div id="tabstrip-statement"
+             data-role="view"  
+             data-title="Statement"
+             data-init="app.bankingStatementService.init" 
+             data-before-show="app.bankingStatementService.beforeShow"
+             data-model="app.bankingStatementService.viewModel">
+            
+            <div class="view-content">          
+                 
+            <ul data-role="listview" data-auto-bind="false" data-style="inset">
+                <li>
+                    <label for="fromaccount">From Account:</label>    
+                    <div class="divFullRow">
+                        <select id="fromaccount" name="fromaccount" data-text-field="name" data-value-field="id" data-bind="source: fromAccounts, value: statementInfo.data()[0].fromacct" required="required">
+                        </select> 
+                    </div>
+                </li>              
+
+                <li>
+                    <label for="Month">Month:</label> 
+                	<select id='Month' name='Month' class='ctrl' data-bind="value: statementInfo.data()[0].month" >
+                		<option value='0' selected>Jan</option>
+                		<option value='1'>Feb</option>
+                		<option value='2'>Mar</option>
+                		<option value='3'>Apr</option>
+                		<option value='4'>May</option>
+                		<option value='5'>Jun</option>
+                		<option value='6'>Jul</option>
+                		<option value='7'>Aug</option>
+                		<option value='8'>Sep</option>
+                		<option value='9'>Oct</option>
+                		<option value='10'>Nov</option>
+                		<option value='11'>Dec</option>
+                	</select>
+                </li>
+                <li>
+                    <label for="Year">Year:</label> 
+                	<select id='Months' name='Months' class='ctrl' data-bind="value: statementInfo.data()[0].year" >
+                		<option value='2013' selected>2013</option>
+                		<option value='2012'>2012</option>
+                		<option value='2011'>2011</option>
+                		<option value='2010'>2010</option>
+                		<option value='2009'>2009</option>
+                		<option value='2008'>2008</option>
+                	</select>
+                </li> 
+                     
+            </ul>
+            <div class="buttonArea"> 
+                <a data-role="button" href="#tabstrip-statementhistory" class="std-button">Continue</a>
+            </div>
+            </div>           
+        </div> 
+        
+        <div id="tabstrip-statementhistory"
+             data-role="view"  
+             data-title="Statement"
+             data-model="app.bankingStatementHistoryService.viewModel">
+          
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton" id="stmthistback">Back</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                    <a class="nav-button" data-align="right" data-role="button" id="done">Done</a>
+                </div>
+            </header>
+
+            <div data-role="content">        
+                <div class="historyinfo">
+                    <div id="statementinfo-listview" data-role="listview" data-auto-bind="false" data-bind="source: bankingStatementHistoryInfoDataSource" data-template="statementhistoryinfo-listview-template" data-style="inset"></div>
+                </div>
+                 <div id="statementhistory">    
+                    <ul id="statementhistory-listview" data-role="listview" data-auto-bind="false" data-bind="source: bankingStatementHistoryDataSource" data-template="statementhistory-listview-template" data-header-template="statementhistory-header-template" data-style="inset"></ul>
+                </div>
+            </div> 
+        </div>
+        
+        <!-- Statement History View templates -->
+        <script type="text/x-kendo-template" id="statementhistory-listview-template">
+            <span class="divRow"> 
+                <div class="divLeft">${description}</div>
+                <div class="divRight">${amount}</div>
+            </span>
+        </script>
+        
+        <script type="text/x-kendo-template" id="statementhistory-header-template">
+             #= kendo.toString(kendo.parseDate(value, 'yyyy-MM-dd'), 'd MMM, yyyy') #
+        </script>    
+
+        <script type="text/x-kendo-template" id="statementhistoryinfo-listview-template">
+            <div class="divTitleRow">${fromacct}</div>
+            <div class="divSubRow">Month
+                <div class="divSubRight">${month}</div>
+            </div>
+            <div class="divSubRow">Year
+                <div class="divSubRight">${year}</div>
+            </div>
+            <div class="divTitleRow">Transactions
+                
+            </div> 
+        </script>    
+        
+        <div id="tabstrip-vendor" 
+             data-role="view"  
+             data-title="Bill Accounts"
+             data-init="app.bankingVendorsService.listViewInit"
+             data-model="app.bankingVendorsService.viewModel">
+
+            <div class="content">
+
+               <!--<ul id="list-edit-listview" data-role="listview" data-style="inset"></ul>-->
+               <ul id="list-edit-listview"></ul>
+                
+
+            </div>               
+        </div>
+        
+    	<!-- bill account templates -->
+        <script id="itemTemplate" type="text/x-kendo-template">
+            #if(nickname.length > 1){#
+                <a><span class="banking-account-link">#=nickname# - #=number#</span></a>
+            #}else{#
+                <a><span class="banking-account-link">#=vendor# - #=number#</span></a>
+            #}#
+        </script>  
+        
+        <div id="vendor-detailview" 
+             data-role="view"  
+             data-title="Bill Accounts"
+             data-show="app.bankingVendorsService.detailShow" 
+             data-init="app.bankingVendorsService.detailInit">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton" id="cancel">Cancel</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                    <a class="nav-button" data-align="right" data-role="button" id="done">Done</a>
+                </div>
+            </header>
+
+            <form>
+                <ul data-role="listview" data-auto-bind="false" data-style="inset" onclick="">
+                    <li>
+                        <label>Vendor:</label>   
+                    	<div class="divFullRow">
+                        	<select id="venderlist" name="venderlist" data-text-field="name" data-value-field="id" data-bind="source: app.bankingVendorsService.viewModel.bankingVendorsList, value: vendor" required="required" class="fullSelect">
+                        	</select> 
+                    	</div>
+                    </li>
+                    <li>
+                        <label>Number:</label>
+                        <div class="divFullRow">
+                        	<input type="text" data-bind="value: number"/> 
+                    	</div>
+                    </li>
+                    <li>
+                        <label>Nickname:</label>
+                        <div class="divFullRow">
+                        	<input type="text" data-bind="value: nickname"/> 
+                    	</div>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        
+        <div id="tabstrip-password" 
+             data-role="view"  
+             data-title="Password"
+             data-init="app.bankingPasswordService.init">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <a class="nav-button" data-align="left" data-role="backbutton" id="pwcancel">Cancel</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+                    <a class="nav-button" data-align="right" data-role="button" id="pwdone">Done</a>
+                </div>
+            </header>
+
+            <form>
+                <ul data-role="listview" data-auto-bind="false" data-style="inset" onclick="">
+                    <li>
+                        <label>Password
+                            <input type="text" data-bind="value: password"/>
+                        </label>
+                    </li>
+                    <li>
+                        <label>New Password
+                            <input type="text" data-bind="value: newpassword"/>
+                        </label>
+                    </li>
+                    <li>
+                        <label>Confirm Password
+                            <input type="text" data-bind="value: confirmpassword"/>
+                        </label>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        
         <!--Location-->
         <div id="tabstrip-location" 
              data-role="view"  
-             data-title="Location" 
+             data-title="Locations" 
              data-init="app.locationService.initLocation" 
              data-show="app.locationService.show" 
-             data-hide="app.locationService.hide" 
              data-model="app.locationService.viewModel" 
              data-stretch="true">
 
-            <div id="map-search-wrap">
-                <button id="map-navigate-home" data-bind="click: onNavigateHome"></button>
-                <form onsubmit="return false;">
-                    <input id="map-address" type="search" data-bind="value: address" placeholder="Address"/>
-                    <input id="map-search" type="submit" value="" data-bind="click: onSearchAddress" />
-                </form>
+        	<header data-role="header">
+        		<div data-role="navbar">
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+           
+                    <button data-role="button" data-align="right" id="buttonBranchesListView" data-bind="events: { click: navToBranchesList }">List</button>
+        		</div>    
+            </header>
+        	<div data-role="content">
+            	<div class="offline">
+                    Please reconnect to the Internet.
+                </div>
+                <div id="branches"> 
+
+                    <div id="map">
+        			</div>
+
+                </div>           
+            </div>        
+        </div>
+        
+        <div data-role="view" id="tabstrip-locationList" data-title="Locations" data-model="app.locationService.viewModel">
+        	<header data-role="header">
+        		<div data-role="navbar">
+                    <a data-role="backbutton" data-align="left">Back</a>
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
+                    <span data-role="view-title"></span>
+        		</div>    
+            </header>
+
+            
+        	<div id="branchesViewContent" data-role="content">
+         		<!-- List of cards -->
+                <ul class="branchListWrapper" data-role="listview" data-style="inset" data-type="group">
+                    <li>
+                        <ul id="branchesList" data-role="listview" data-bind="source: branchList" data-template="branchesListTemplate">
+                        </ul>
+                    </li>
+                </ul>       
+                  
             </div>
-            <div id="map-canvas"></div>
 
         </div>
+
+        <script type="text/x-kendo-template" id="branchesListTemplate">
+                <div class="item-symbol">
+                </div>
+                <h3 class="item-title">#: data.name #</h3>
+                <p class="item-info">#: data.address1 #<br />
+                #: data.address2 #</p>
+                <div class="item-box">
+                    <a data-role="button" data-rel="modalview" href="\#modal-branchhours" data-hours="#: data.uid #" class="left-button">Branch Hours</a>
+                    <a data-role="button" class="right-button" data-click="app.locationService.clickMapit" data-lat="#: data.latitude #" data-lng="#: data.longitude #">Map Location</a>
+                </div>
+        </script>        
+        
+
+        
+        <div id="modal-branchhours"
+             data-role="modalview"  
+             data-title="Hours"
+             data-init="app.locationService.initHours"
+             data-open="app.locationService.modalHours"
+             data-model="app.locationService.viewModel"
+             style="width: 80%">            
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>Hours</span>
+                </div>
+            </div>
+            
+            <ul id="branchHoursList" class="hoursList" data-role="listview">
+                <li id="hours1"><span class="hourLabel">l1</span><span class="hourItem">i1</span></li>
+                <li id="hours2"><span class="hourLabel">l2</span><span class="hourItem">i2</span></li>
+                <li id="hours3"><span class="hourLabel">l3</span><span class="hourItem">i3</span></li>
+                <li id="hours4"><span class="hourLabel">l4</span><span class="hourItem">i4</span></li>
+                <li id="hours5"><span class="hourLabel">l5</span><span class="hourItem">i5</span></li>
+                <li id="hours6"><span class="hourLabel">l6</span><span class="hourItem">i6</span></li>
+                <li id="hours7"><span class="hourLabel">w</span><span class="hourItem">w</span></li>
+            </ul>  
+            <a data-click="app.locationService.closeHours" id="modalview-back-button" type="button" data-role="button">Back</a>
+        </div> 
+        
+		<script type="text/x-kendo-template" id="branchHours-modal-template">
+            <p class="modalText">
+                <span data-bind="text: label"></span>
+                <span data-bind="text: value"></span>
+            </p>            
+		</script>  
 
         <!--Weather-->
         <div id="tabstrip-weather" 
@@ -136,6 +1094,7 @@
             <!--Header-->
             <div data-role="header">
                 <div data-role="navbar">
+                    <span class="titlename">BCU </span><span class="titlelogo"></span> 
                     <span data-role="view-title"></span>
                 </div>
             </div>
@@ -143,12 +1102,36 @@
             <!--Footer-->
             <div data-role="footer">
                 <div data-role="tabstrip">
-                    <a href="#tabstrip-home" data-icon="home">Home</a>
-                    <a href="#tabstrip-login" data-icon="contacts">Login</a>
-                    <a href="#tabstrip-location" data-icon="search">Location</a>
-                    <a href="#tabstrip-weather" data-icon="globe">Weather</a>
+                    <a href="#tabstrip-home" data-icon="home2">Home</a>
+                    <a href="#tabstrip-login" data-icon="bank">Banking</a>
+                    <a href="#tabstrip-location" data-icon="find">Locations</a>
                 </div>
             </div>
         </div>
+        
+        <div data-role="modalview" id="modalview-error" style="width: 90%; height: 246px;" data-model="app.errorService.viewModel">
+            <div data-role="header">
+                <div data-role="navbar">
+                    <a data-click="app.errorService.viewModel.clickBack" data-role="button" data-align="left">Back</a>
+                    <span>Error</span>
+                    <a data-click="app.errorService.viewModel.clickCancel" data-role="button" data-align="right">Cancel</a>
+                </div>
+            </div>
+            <ul data-role="listview" data-style="inset">
+                <li style="height: 130px;">
+                    <div class="errorBox">
+                        <span class="errorText" data-bind="html: errorStr"></span><br>
+                        <span class="errorText2" data-bind="html: errorStr2"></span><br>
+                        <span class="errorText3" data-bind="html: errorStr3"></span>
+                        <span class="errorText3" data-bind="html: errorStr4"></span>
+                    </div>
+                </li>
+            </ul>            
+            
+
+
+            <a data-click="app.errorService.viewModel.clickCancel" id="modalview-login-button" type="button" data-role="button">close</a>
+        </div>  
+        
     </body>
 </html>
