@@ -3,46 +3,22 @@
         app = global.app = global.app || {};
     
     BankingHistoryViewModel = kendo.data.ObservableObject.extend({
-        bankingHistoryInfoDataSource: null,
-        bankingHistoryDataSource: null,
+        bankingHistoryInfoDataSource: new kendo.data.DataSource(),
         selectedFrAccount: null,
-        
-        init: function () {
-            var that = this,
-                dataSource, infoSource;
-            
-            kendo.data.ObservableObject.fn.init.apply(that, []);
-            
-            infoSource = new kendo.data.DataSource();
-            
-            that.set("bankingHistoryInfoDataSource", infoSource);     
-            
-            dataSource = new kendo.data.DataSource({
+        bankingHistoryDataSource:  new kendo.data.DataSource({
                 transport: {
-                    /*read: {
-                        url: "data/historyData.json",
-                        dataType: "json"
-                    }*/
-                    
                     read: {
                         type: "POST",
                         //contentType: "application/json",
                         crossDomain:true,
-                        url: "http://in2itive.dlinkddns.com/IbnkWcf/service1.svc/JSONService",
+                        url: function(options) { return app.getURL() + "/IbnkWcf/service1.svc/JSONService"; },
                         dataType: "json",
-                        async: false,
-                        /*data: {"Trxn":	  "hst", 
-                               "Access":	"Process",
-                               "FrAccount": that.selectedFrAccount,
-                               "Pos":	   "0",
-                               "CustID":    app.loginService.viewModel.get("CustID").trim(), 
-                               "SessionID": app.loginService.viewModel.get("SessionID").trim(), 
-                               "Sequence":  app.loginService.viewModel.get("Sequence").trim()}*/
+                        async: false
                     } , 
                     parameterMap: function (data, operation) {
                         //return kendo.stringify(data);
                         
-                        console.log("map: selected=" + that.selectedFrAccount);
+                        console.log("map: selected=" + app.bankingAccountsService.viewModel.get("selectedAccount"));
                         console.log("map: selected=" + data.FrAccount);
                         console.log("map: data=" + kendo.stringify(data));
                         return kendo.stringify({"Trxn":	  "hst", 
@@ -79,36 +55,30 @@
                 serverPaging: true,
                 serverSorting: true,
                 pageSize: 10,
-                group: { field: "effective", dir: "desc" }
-                
-                
-            });
-            dataSource.fetch (function(){
-                
-            	//var that = this;
-                var data = this.data();
-                console.log("history length = " + data.length);  
+                group: { field: "effective", dir: "desc" },
+                fetch: function(e){
+               	 var data = this.data();
+                	console.log("history length = " + data.length);  
            	 
-                if (data.length > 0 ) {
-                    var errorCode = parseInt(data[0].get("ErrorCode"));
-                    
-    				if (errorCode > 0 ) {
-                        // we have an error to process
-                    	// Set these fields for the sake of the template
-                        data[0].set("order", " " );
-                        data[0].set("effective", " " );
-                        data[0].set("description", " " );                        
+                    if (data.length > 0 ) {
+                        var errorCode = parseInt(data[0].get("ErrorCode"));
                         
+        				if (errorCode > 0 ) {
+                            // we have an error to process
+                        	// Set these fields for the sake of the template
+                            data[0].set("order", " " );
+                            data[0].set("effective", " " );
+                            data[0].set("description", " " );                        
+                            
+                        }
+                    }
+                    else {
+                        // need to track this
                     }
                 }
-                else {
-                    // need to track this
-                }
-            });     
-           
-            that.set("bankingHistoryDataSource", dataSource); 
-        },
-        
+                
+            }),
+            
         beforeshow: function (e) {
             console.log("beforeshow has run");
             var accountArray = app.bankingAccountsService.viewModel.get("selectedAccount"),

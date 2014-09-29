@@ -139,7 +139,7 @@
                     that.set("errorStr3", "Your Account has been <u>locked out</u>. <i>Please contact your branch</i>.");                   
                     that.set("errorCancel", "Cancel");  
                 }
-            	if(errorCode === 3107 || errorCode === 3108 || errorCode === 3110) {            
+            	else if(errorCode === 3107 || errorCode === 3108 || errorCode === 3110) {            
                     that.set("errorStr", "Your session has been <i>inactive</i> for too long.");
                     that.set("errorStr2", "Return to the Login form to re-enter your login information.");
                     that.set("errorCancel", "Login");
@@ -194,25 +194,25 @@
                     that.set("errorBack", "Back");
                     that.set("errorCancel", "Cancel");
                 }
-            	if(errorCode === 5803) {            
+            	else if(errorCode === 5803) {            
                     that.set("errorStr", "Your transaction could <i>not</i> be completed.");
                     that.set("errorStr2", "<i>Select Back and re-enter incorrect values.</i>");
                     that.set("errorBack", "Back");
                     that.set("errorCancel", "Cancel");
                 }
-            	if(errorCode === 5810) {            
+            	else if(errorCode === 5810) {            
                     that.set("errorStr", "Password Change <i>rejected</i>.");
                     that.set("errorStr2", "<i>Password is too long.</i>");
                     that.set("errorStr3", "Click on \"Back\" to re-enter your password information.");
                     that.set("errorBack", "Back");
                 }
-            	if(errorCode === 5811) {            
+            	else if(errorCode === 5811) {            
                     that.set("errorStr", "Password Change <i>rejected</i>.");
                     that.set("errorStr2", "<i>Password was not verified properly.</i>");
                     that.set("errorStr3", "Click on \"Back\" to re-enter your password information.");
                     that.set("errorBack", "Back");
                 }
-            	if(errorCode === 5812) {            
+            	else if(errorCode === 5812) {            
                     that.set("errorStr", "Password Change <i>rejected</i>.");
                     that.set("errorStr2", "<i>New password must be different.</i>");
                     that.set("errorStr3", "Click on \"Back\" to re-enter your password information.");

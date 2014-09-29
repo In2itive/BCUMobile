@@ -40,7 +40,8 @@
                         //contentType: "application/json",
                         crossDomain:true,
                         timeout: 90,
-                        url: "http://in2itive.dlinkddns.com/IbnkWcf/service1.svc/JSONService",
+                        //url: "http://in2itive.dlinkddns.com/IbnkWcf/service1.svc/JSONService"
+                        url: function(options) { return app.getURL() + "/IbnkWcf/service1.svc/JSONService"; },
                         dataType: "json",
                         async: false,
                         data: {"Trxn": "ver", "CustID": username, "Passwd": passwd},

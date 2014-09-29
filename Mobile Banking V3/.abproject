@@ -51,7 +51,7 @@
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
   "BundleVersion": "1.0",
-  "DisplayName": "In2itive Enterprises Inc.",
+  "DisplayName": "BCU Mobile Banking",
   "Author": "In2itive Enterprises Inc.",
   "Description": "Mobile Banking V3",
   "Framework": "Cordova",

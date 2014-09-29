@@ -3,95 +3,14 @@
         app = global.app = global.app || {};
     
     BankingVendorsViewModel = kendo.data.ObservableObject.extend({
-        bankingVendorsDataSource: null,
-        bankingVendorsList: [],
-        bankingVendorsDS: new kendo.data.DataSource({
+        bankingVendorSelected: {},
+        bankingVendorsDataSource: new kendo.data.DataSource({
                 transport: {
                     read: {
                         type: "POST",
                         //contentType: "application/json",
                         crossDomain:true,
-                        url: "http://in2itive.dlinkddns.com/IbnkWcf/service1.svc/JSONService",
-                        dataType: "json",
-                        async: false,                    
-                    }, 
-                    parameterMap: function (data, operation) {
-                        //return kendo.stringify(data);
-						console.log("--- VDR LIST ---");
-                        return kendo.stringify({"Trxn":	  "vdr", 
-                               "Access":	 "ToAc",
-                               "CustID":     app.loginService.viewModel.get("CustID").trim(), 
-                               "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                               "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
-                    }
-                },            
-                schema: {
-                    model: {
-                        id: "id",
-                        fields: {
-                            id: { type: "string" },
-                            name: { type: "string" }
-                        }
-                    }
-                },
-                change: function (e) {
-                    //JSON.stringify(app.bankingBillPayService.viewModel));
-                    app.bankingVendorsService.viewModel.set("bankingVendorsList", this.view());
-                }
-            }),
-        
-        init: function () {
-            var that = this,
-                dataSource, listSource;
-            
-            console.log("view model Init run");
-            
-            kendo.data.ObservableObject.fn.init.apply(that, []);
-            
-            listSource: new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        type: "POST",
-                        //contentType: "application/json",
-                        crossDomain:true,
-                        url: "http://in2itive.dlinkddns.com/IbnkWcf/service1.svc/JSONService",
-                        dataType: "json",
-                        async: false,                    
-                    }, 
-                    parameterMap: function (data, operation) {
-                        //return kendo.stringify(data);
-
-                        return kendo.stringify({"Trxn":	  "vdr", 
-                               "Access":	 "ToAc",
-                               "CustID":     app.loginService.viewModel.get("CustID").trim(), 
-                               "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                               "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
-                    }
-                },            
-                schema: {
-                    model: {
-                        id: "id",
-                        fields: {
-                            id: { type: "string" },
-                            name: { type: "string" }
-                        }
-                    }
-                },
-                change: function (e) {
-                    //console.log(JSON.stringify(app.bankingBillPayService.viewModel));
-                    app.bankingVendorsService.viewModel.set("bankingVendorsList", this.view());
-                }
-            }); 
-            
-            //that.set("bankingVendorsDS", listSource);  
-                
-            dataSource = new kendo.data.DataSource({
-                transport: {
-                    read: {
-                        type: "POST",
-                        //contentType: "application/json",
-                        crossDomain:true,
-                        url: "http://in2itive.dlinkddns.com/IbnkWcf/service1.svc/JSONService",
+                        url: function(options) { return app.getURL() + "/IbnkWcf/service1.svc/JSONService"; },
                         dataType: "json",
                         async: false
                     } , 
@@ -139,10 +58,8 @@
                         }
                     }
                 }
-            });
-           
-            that.set("bankingVendorsDataSource", dataSource);           
-        }        
+        }),
+     
     });  
     
     app.bankingVendorsService = {
@@ -151,7 +68,8 @@
         listViewInit: function (initEvt) {
             console.log("listViewInit run");
             app.bankingVendorsService.viewModel.bankingVendorsDataSource.read();
-            app.bankingVendorsService.viewModel.bankingVendorsDS.read();
+            //app.bankingVendorsService.viewModel.bankingVendorsDS.read();
+            
             initEvt.view.element.find("#list-edit-listview").kendoMobileListView({
                 dataSource: app.bankingVendorsService.viewModel.bankingVendorsDataSource,
                 style: "inset",
@@ -169,6 +87,7 @@
         
         navigate: function (e) {
             var itemUID = $(e.touch.currentTarget).data("uid");
+            app.bankingVendorsService.viewModel.bankingVendorSelected = app.bankingVendorsService.viewModel.bankingVendorsDataSource.getByUid(itemUID);
             kendo.mobile.application.navigate("#vendor-detailview?uid=" + itemUID);
         },
 
@@ -198,38 +117,7 @@
             } else {
                 listview.items().find("[data-role=button]:visible").hide();
             }
-        },
-
-        detailShow: function (e) {
-            var model = app.bankingVendorsService.viewModel.bankingVendorsDataSource.getByUid(e.view.params.uid);
-
-            kendo.bind(e.view.element, model, kendo.mobile.ui);
-        },
-        
-        detailInit: function (e) {
-            var view = e.view;
-            view.element.find("#done").data("kendoMobileButton").bind("click", function() {
-                app.bankingVendorsService.viewModel.bankingVendorsDataSource.one("change", function() {
-                    view.loader.hide();
-                    app.application.navigate("#:back");
-                    //window.kendoMobileApplication.navigate("#:back");
-                });
-
-                view.loader.show();
-                app.bankingVendorsService.viewModel.bankingVendorsDataSource.sync();
-            });
-
-            view.element.find("#cancel").data("kendoMobileBackButton").bind("click", function(e) {
-                e.preventDefault();
-                app.bankingVendorsService.viewModel.bankingVendorsDataSource.one("change", function() {
-                    view.loader.hide();
-                    app.application.navigate("#:back");
-                    //window.kendoMobileApplication.navigate("#:back");
-                });
-
-                view.loader.show();
-                app.bankingVendorsService.viewModel.bankingVendorsDataSource.cancelChanges();
-            });
-        }        
+        }
+    
     };
 })(window);

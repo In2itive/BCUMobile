@@ -18,9 +18,46 @@
     app.sysURL = function () {
         if(sysType === "Dev")
         {
-        	return "http://192.168.0.185";
+        	return "http://dev.in2itive.ca";
         }
-        return "http://in2itive.dlinkddns.com";
+        return "http://dev.in2itive.ca";
+    }
+    
+    app.appType = "Dev";
+    
+    app.getURL = function() {
+        if(app.appType === "Dev") {
+            return "http://dev.in2itive.ca";
+        }
+        if(app.appType === "UAT") {
+            return "http://dev.in2itive.ca";
+        }
+        return "http://dev.in2itive.ca";
+    }
+    
+    app.openSettings = function (e) {
+        $('#apptype').val(app.appType);
+		$("#modal-appconfig").data("kendoMobileModalView").open();
+    }
+    
+    app.closeSettings = function (e) {
+        localStorage.setItem("appType", app.appType)
+        $("#modal-appconfig").kendoMobileModalView("close");
+    }
+      
+    app.setTypeProd = function (e) {
+        app.appType = "Prod";
+        $('#apptype').val(app.appType);
+        alert(app.loginService.viewModel.transport.options.read.url);
+        
+    }
+    app.setTypeUAT = function (e) {
+        app.appType = "UAT";
+        $('#apptype').val(app.appType);
+    }    
+    app.setTypeDev = function (e) {
+        app.appType = "Dev";
+        $('#apptype').val(app.appType);
     }
     
 })(window);

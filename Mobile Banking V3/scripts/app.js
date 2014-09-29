@@ -6,6 +6,12 @@
         
         app.application = new kendo.mobile.Application(document.body, { layout: "tabstrip-layout" });
         app.application.skin("flat");
+        app.appType = localStorage.getItem("appType");
+        
+        if (app.appType === undefined || app.appType === null || app.appType === "null") {
+			app.appType = "Dev";
+		}
+        console.log(localStorage.getItem("appType"));
         
     }, false);
 

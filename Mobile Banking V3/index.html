@@ -23,6 +23,7 @@
         <script src="scripts/bankingstatement.js"></script>
         <script src="scripts/bankingstatementhistory.js"></script>
         <script src="scripts/bankingvendors.js"></script>
+        <script src="scripts/bankingvendoredit.js"></script>
         <script src="scripts/bankingpassword.js"></script>
         <script src="scripts/weather.js"></script>
         <script src="scripts/error.js"></script>
@@ -45,6 +46,8 @@
             <div class="view-content">
                 <div class="onethird">
                      <!--a id="skin-change" data-role="button" data-click="app.changeSkin">Flat</a-->
+                    <a data-role="button" data-rel="modalview" data-click="app.openSettings" id="skin-change">Settings</a>
+
                 </div>
                         
                 <div class="homechild">
@@ -76,7 +79,23 @@
 
 
             </div>
-		</script>  
+		</script>            
+        
+        <div id="modal-appconfig"
+             data-role="modalview"  
+             data-title="App Settings" >        
+            <div data-role="header">
+                <div data-role="navbar">
+                    <span>App Settings</span>
+                </div>
+            </div>
+            <label for="apptype">App Type:</label>  
+            <input id="apptype" name="apptype" />     
+            <a data-click="app.setTypeProd" class="full-button" type="button" data-role="button">Set to Prod</a>               
+            <a data-click="app.setTypeUAT" class="full-button" type="button" data-role="button">Set to UAT</a>               
+            <a data-click="app.setTypeDev" class="full-button" type="button" data-role="button">Set to Dev</a>  <br />             
+            <a data-click="app.closeSettings" id="modalview-close-button" type="button" data-role="button">Close</a>
+        </div>         
         
         <!--Login-->
         <div id="tabstrip-login" 
@@ -156,10 +175,10 @@
             <div class="view-content">
                 <ul id="accounts-listview" 
                     data-role="listview" 
+                    data-auto-bind="false"
                     data-bind="source: bankingAccountsDataSource" 
                     data-template="account-listview-template" 
                     data-style="inset" 
-                    data-auto-bind="false" 
                     data-click="app.bankingAccountsService.viewModel.accountClick">
                 </ul>
             </div>
@@ -274,7 +293,6 @@
              data-role="view"  
              data-title="Transfer"
              data-auto-bind="false" 
-             data-init="app.bankingTransferService.init" 
              data-before-show="app.bankingTransferService.beforeShow"
              data-model="app.bankingTransferService.viewModel">
             
@@ -320,7 +338,7 @@
                 </li>
                 <li>                           
                     <label for="amount">Amount:</label> 
-                    <input type="number" id="amount" name="amount" data-bind="value: transferInfo.data()[0].amount" />                   
+                    <input type="number" id="amount" name="amount" data-decimals="2" data-bind="value: transferInfo.data()[0].amount" />                   
                 </li>
                 <li>
                     <label for="startdate"><span id="LayerStart">Start </span>Date:</label> 
@@ -434,10 +452,6 @@
                     </div>
                     <p class="more-info">Set the day to 31 to have the transation effective the last day of the month.</p>
                 </li>                
-                <li>
-                    <label>End of Month</label>
-                    <input type="checkbox"  data-off-label="No" data-on-label="Yes" />
-                </li>
                      
             </ul>
             <a data-role="button" data-rel="modalview" data-click="app.bankingTransferService.checkTransfer" id="transferconfirm-button">Continue</a>
@@ -455,7 +469,7 @@
                     <span>Confirm</span>
                 </div>
             </div>
-            <div id="transferconfirm-listview" data-role="listview" data-bind="source: transferInfo" data-template="transferConfirm-listview-template" data-style="inset"></div>            
+            <div id="transferconfirm-listview" data-role="listview" data-auto-bind="false" data-bind="source: transferInfo" data-template="transferConfirm-listview-template" data-style="inset"></div>            
             <a data-click="app.bankingTransferService.submitTransferconfirm" id="modalview-submit-button" type="button" data-role="button">Submit</a>
             <a data-click="app.bankingTransferService.closeTransferconfirm" id="modalview-back-button" type="button" data-role="button">Back</a>
         </div> 
@@ -476,7 +490,7 @@
             <div class="view-content">          
                  
 
-            <div id="transferconfirm-listview" data-role="listview" data-bind="source: transferInfo" data-template="transferPosted-listview-template" data-style="inset"></div>            
+            <div id="transferconfirm-listview" data-role="listview" data-auto-bind="false" data-bind="source: transferInfo" data-template="transferPosted-listview-template" data-style="inset"></div>            
                 <div class="buttonArea">     
                     <a data-role="button" href="#tabstrip-login" class="std-button">Continue</a>
                 </div>
@@ -579,7 +593,7 @@
                 </li>
                 <li>                           
                     <label for="amount">Amount:</label> 
-                    <input type="number" id="amount" name="amount" data-bind="value: billpayInfo.data()[0].amount" />                   
+                    <input type="number" id="amount" name="amount" data-decimals="2" data-bind="value: billpayInfo.data()[0].amount" />                   
                 </li>
                 <li>
                     <label for="startdate"><span id="LayerStart_b">Start </span>Date:</label> 
@@ -693,10 +707,6 @@
                     </div>
                     <p class="more-info">Set the day to 31 to have the transation effective the last day of the month.</p>
                 </li>                
-                <li>
-                    <label>End of Month</label>
-                    <input type="checkbox"  data-off-label="No" data-on-label="Yes" />
-                </li>
                      
             </ul>
             <a data-role="button" data-rel="modalview" data-click="app.bankingBillPayService.checkBillPay" id="billpayconfirm-button">Continue</a>
@@ -714,7 +724,7 @@
                     <span>Confirm</span>
                 </div>
             </div>
-            <div id="billpayconfirm-listview" data-role="listview" data-bind="source: billpayInfo" data-template="billpayConfirm-listview-template" data-style="inset"></div>            
+            <div id="billpayconfirm-listview" data-role="listview" data-auto-bind="false" data-bind="source: billpayInfo" data-template="billpayConfirm-listview-template" data-style="inset"></div>            
             <a data-click="app.bankingBillPayService.submitBillPayconfirm" id="modalview-submit-button" type="button" data-role="button">Submit</a>
             <a data-click="app.bankingBillPayService.closeBillPayconfirm" id="modalview-back-button" type="button" data-role="button">Back</a>
         </div> 
@@ -735,7 +745,7 @@
             <div class="view-content">          
                  
 
-            <div id="billpayconfirm-listview" data-role="listview" data-bind="source: billpayInfo" data-template="billpayPosted-listview-template" data-style="inset"></div>            
+            <div id="billpayconfirm-listview" data-role="listview" data-auto-bind="false" data-bind="source: billpayInfo" data-template="billpayPosted-listview-template" data-style="inset"></div>            
                 <div class="buttonArea">     
                     <a data-role="button" href="#tabstrip-login" class="std-button">Continue</a>
                 </div>
@@ -857,15 +867,17 @@
         <div id="tabstrip-vendor" 
              data-role="view"  
              data-title="Bill Accounts"
-             data-init="app.bankingVendorsService.listViewInit"
+             data-before-show="app.bankingVendorsService.listViewInit"
              data-model="app.bankingVendorsService.viewModel">
 
             <div class="content">
 
                <!--<ul id="list-edit-listview" data-role="listview" data-style="inset"></ul>-->
                <ul id="list-edit-listview"></ul>
-                
-
+             <div class="buttonArea"> 
+                <a data-role="button" href="#vendor-detailview" class="std-button">Add</a>
+            </div>               
+    
             </div>               
         </div>
         
@@ -881,14 +893,16 @@
         <div id="vendor-detailview" 
              data-role="view"  
              data-title="Bill Accounts"
-             data-show="app.bankingVendorsService.detailShow" 
-             data-init="app.bankingVendorsService.detailInit">
+             data-init="app.bankingVendorEditService.init"
+             data-before-show="app.bankingVendorEditService.beforeShow" 
+             data-show="app.bankingVendorEditService.show"             
+             data-model="app.bankingVendorEditService.viewModel">
             <header data-role="header">
                 <div data-role="navbar">
                     <a class="nav-button" data-align="left" data-role="backbutton" id="cancel">Cancel</a>
                     <span class="titlename">BCU </span><span class="titlelogo"></span> 
                     <span data-role="view-title"></span>
-                    <a class="nav-button" data-align="right" data-role="button" id="done">Done</a>
+                    <a class="nav-button" data-align="right" data-role="button" data-click="app.bankingVendorEditService.save" id="done">Done</a>
                 </div>
             </header>
 
@@ -897,36 +911,42 @@
                     <li>
                         <label>Vendor:</label>   
                     	<div class="divFullRow">
-                        	<select id="venderlist" name="venderlist" data-text-field="name" data-value-field="id" data-bind="source: app.bankingVendorsService.viewModel.bankingVendorsList, value: vendor" required="required" class="fullSelect">
+                        	<select id="venderlist" name="venderlist" data-text-field="name" data-value-field="id" data-bind="source: bankingVendorsList, value: bankingVendorEditDataSource.data()[0].name, readonly: bankingVendorEditDataSource.data()[0].showdelete" required="required" class="fullSelect">
                         	</select> 
+                            <!--input type="text" data-bind="value: vendor"/--> 
                     	</div>
                     </li>
                     <li>
                         <label>Number:</label>
                         <div class="divFullRow">
-                        	<input type="text" data-bind="value: number"/> 
+                        	<input type="text" data-bind="value: bankingVendorEditDataSource.data()[0].number"/> 
                     	</div>
                     </li>
                     <li>
                         <label>Nickname:</label>
                         <div class="divFullRow">
-                        	<input type="text" data-bind="value: nickname"/> 
+                        	<input type="text" data-bind="value: bankingVendorEditDataSource.data()[0].nickname"/> 
                     	</div>
                     </li>
                 </ul>
             </form>
+            <div class="buttonArea"> 
+                <a data-role="button" data-click="app.bankingVendorEditService.delete" data-bind="visible: bankingVendorEditDataSource.data()[0].showdelete" class="std-button">Delete</a>
+            </div>  
         </div>
         
         <div id="tabstrip-password" 
              data-role="view"  
              data-title="Password"
-             data-init="app.bankingPasswordService.init">
+             data-init="app.bankingPasswordService.init"
+             data-before-show="app.bankingPasswordService.beforeShow"
+             data-model="app.bankingPasswordService.viewModel">
             <header data-role="header">
                 <div data-role="navbar">
                     <a class="nav-button" data-align="left" data-role="backbutton" id="pwcancel">Cancel</a>
                     <span class="titlename">BCU </span><span class="titlelogo"></span> 
                     <span data-role="view-title"></span>
-                    <a class="nav-button" data-align="right" data-role="button" id="pwdone">Done</a>
+                    <a class="nav-button" data-align="right" data-role="button" id="pwdone" data-click="app.bankingPasswordService.submitChange">Done</a>
                 </div>
             </header>
 
@@ -934,17 +954,17 @@
                 <ul data-role="listview" data-auto-bind="false" data-style="inset" onclick="">
                     <li>
                         <label>Password
-                            <input type="text" data-bind="value: password"/>
+                            <input type="text" data-bind="value: passwordInfo.data()[0].password"/>
                         </label>
                     </li>
                     <li>
                         <label>New Password
-                            <input type="text" data-bind="value: newpassword"/>
+                            <input type="text" data-bind="value: passwordInfo.data()[0].newpassword"/>
                         </label>
                     </li>
                     <li>
                         <label>Confirm Password
-                            <input type="text" data-bind="value: confirmpassword"/>
+                            <input type="text" data-bind="value: passwordInfo.data()[0].confirmpassword"/>
                         </label>
                     </li>
                 </ul>

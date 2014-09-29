@@ -3,22 +3,14 @@
         app = global.app = global.app || {};
     
     BankingScheduledViewModel = kendo.data.ObservableObject.extend({
-        bankingScheduledDataSource: null,
         selectedScheduled: null,
-        
-        init: function () {
-            var that = this,
-                dataSource;
-            
-            kendo.data.ObservableObject.fn.init.apply(that, []);
-                     
-            dataSource = new kendo.data.DataSource({
+        bankingScheduledDataSource: new kendo.data.DataSource({
                 transport: {
                     read: {
                         type: "POST",
                         //contentType: "application/json",
                         crossDomain:true,
-                        url: "http://in2itive.dlinkddns.com/IbnkWcf/service1.svc/JSONService",
+                        url: function(options) { return app.getURL() + "/IbnkWcf/service1.svc/JSONService"; },
                         dataType: "json",
                         async: false
                     } , 
@@ -51,35 +43,30 @@
                         }
                 	}
             	},
-                group: { field: "group" }
-            });
-            dataSource.fetch (function(){
-                
-            	//var that = this;
-                var data = this.data();
-                console.log("Scheduled length = " + data.length);  
-           	 
-                if (data.length > 0 ) {
-                    var errorCode = parseInt(data[0].get("ErrorCode"));
-                    
-    				if (errorCode > 0 ) {
-                        // we have an error to process
-                    	// Set these fields for the sake of the template
-                        data[0].set("group", " " );
-                        data[0].set("product", " " );
-                        data[0].set("balance", "0.00" );
+                group: { field: "group" },
+            
+            	fetch: function(e) {
+                    var data = this.data();
+                    console.log("Scheduled length = " + data.length);  
+               	 
+                    if (data.length > 0 ) {
+                        var errorCode = parseInt(data[0].get("ErrorCode"));
                         
-                        
+        				if (errorCode > 0 ) {
+                            // we have an error to process
+                        	// Set these fields for the sake of the template
+                            data[0].set("group", " " );
+                            data[0].set("product", " " );
+                            data[0].set("balance", "0.00" );
+                            
+                            
+                        }
                     }
-                }
-                else {
-                    // need to track this
-                }
-            });     
-            
-            that.set("bankingScheduledDataSource", dataSource);   
-            
-        },
+                    else {
+                        // need to track this
+                    }
+           	 }
+        }),
         beforeshow: function (e) {
             var that = this;
             var dataSrc = app.bankingScheduledService.viewModel.get("bankingScheduledDataSource")

@@ -22,14 +22,15 @@
          
 			navigator.geolocation.getCurrentPosition(
 				function(position) { 
-					//dfd.resolve(position);
-                    dfd.resolve({"coords":{"latitude":43.72744458647466,"longitude":-79.5245361328125,"accuracy":150,"altitude":100,"heading":null,"speed":0,"altitudeAccuracy":80},"timestamp":"2014-07-07T13:17:52.285Z"}); 
+					dfd.resolve(position);
+                    //dfd.resolve({"coords":{"latitude":43.72744458647466,"longitude":-79.5245361328125,"accuracy":150,"altitude":100,"heading":null,"speed":0,"altitudeAccuracy":80},"timestamp":"2014-07-07T13:17:52.285Z"}); 
 
                     console.log(JSON.stringify(position));
 				}, 
 				function(error) {
                     //alert("I have errors with Geo.");
 					//dfd.reject(error);
+                    //lets default something central
                     dfd.resolve({"coords":{"latitude":43.72744458647466,"longitude":-79.5245361328125,"accuracy":150,"altitude":100,"heading":null,"speed":0,"altitudeAccuracy":80},"timestamp":"2014-07-07T13:17:52.285Z"}); 
 				}, 
 				options);
@@ -48,6 +49,8 @@
                 count;
 
 			_mapElem = mapElem; //Cache DOM element
+            
+            console.log("private initMap");
                 
 			// Use Google API to get the location data for the current coordinates
 			latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
@@ -132,7 +135,7 @@
             
             createMarker(0);
 
-		},
+		}
         
         /*
 		initStoreList: function(position) {
@@ -156,7 +159,7 @@
             app.application.navigate("#tabstrip-locationList");
         },
         navToBranchesMap: function() {
-         
+        	console.log("LVM navToBranchesMap"); 
             app.application.navigate("#tabstrip-location");
         },
 
@@ -184,13 +187,14 @@
         },
         
         moveMap: function (lat, lng) { 
+            console.log("LVM moveMap lat="+lat+" lng="+lng);
             _mapElem.setCenter(new google.maps.LatLng(lat, lng));
         },
                 
         init: function () {
             var that = this,
                 dataSource;
-            
+            console.log("LVM init");
             kendo.data.ObservableObject.fn.init.apply(that, []);
             
             dataSource = new kendo.data.DataSource({
@@ -223,7 +227,7 @@
                     mapTypeControl: false,
                     streetViewControl: false
                 };
-            console.log("initLoc");
+            console.log("LS initLocation");
             map = new google.maps.Map(document.getElementById("map"), mapOptions);            
             geocoder = new google.maps.Geocoder();
             //app.locationService.viewModel.onNavigateHome.apply(app.locationService.viewModel, []);
@@ -248,13 +252,14 @@
         }, */
         
         init: function() {
+            console.log("LS init");
 			_mapElem = document.getElementById("map");
             app.locationService.viewModel.branchList.fetch();
 		},
         
         show: function() {
 			//Don't attempt to reload map/sb data if offline
-			console.log("show");
+			console.log("LS show mapLat="+_mapLat+" mapLng="+_mapLng);
 			if (_isOnline === false) {				
 				alert("Please reconnect to the Internet to load locations.");
     
@@ -262,7 +267,7 @@
 			}
             
             if (_doneShow === true) {
-                if (_mapLat !== 0) {
+                if (_mapLat !== undefined &&_mapLat !== 0) {
                     _mapObj.setZoom(14);
                     _mapObj.setCenter(new google.maps.LatLng(_mapLat, _mapLng));
                     _mapLat = 0;
@@ -296,11 +301,10 @@
  		   //Don't attempt to reload map/sb data if offline
 			//console.log("clickHours", JSON.stringify(e.button.data()));
             var mapData = e.button.data();
-
            _mapLat = mapData.lat;
            _mapLng = mapData.lng;
             
-           console.log("clickMapit lat and lang = ", _mapLat, ", ", _mapLng);
+           console.log("LS clickMapit lat and lang = ", _mapLat, ", ", _mapLng);
            app.application.navigate("#tabstrip-location");
        },
         
@@ -310,7 +314,7 @@
             var listHours = e.button.data();
             var dataSet = $('#branchesList').data("kendoMobileListView").dataSource._data;
             //var clicked;      
-           
+            console.log("LS clickHours");
             for(var i=0; i < dataSet.length; i++)
             {
                 var dataItem = dataSet[i];
@@ -328,11 +332,11 @@
         },
         
         initHours: function(e) {
-            console.log("initHours");
+            console.log("LS initHours");
         },
         
         modalHours: function(e) {
-            console.log("modalHours");
+            console.log("LS modalHours");
             console.log(e.target.context.dataset.hours);
             itemUID = e.target.context.dataset.hours;
             var dataSet = $('#branchesList').data("kendoMobileListView").dataSource._data;
