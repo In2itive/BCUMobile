@@ -360,7 +360,8 @@
         
         closeTransferconfirm: function() {
 
-            $("#modal-transferconfirm").kendoMobileModalView("close");
+            //$("#modal-transferconfirm").kendoMobileModalView("close");
+            $("#modal-transferconfirm").data("kendoMobileModalView").close();
         },
        
         submitTransferconfirm: function() {
@@ -476,6 +477,8 @@
             $("#modal-transferconfirm").data("kendoMobileModalView").open();
             
         },
+        
+        tranString: "",
                
         confirmString: function (beforeShowEvt) {
             var tmp_str = "";
@@ -483,7 +486,7 @@
             
             console.log("before confirm");
             //alert("confirm");
-            tmp_str = "You are transfering $" + app.bankingTransferService.viewModel.transferInfo.data()[0].amount + " from your<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].fromacct + "</b><br />account to your<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].toacct + "</b><br />account ";
+            tmp_str = " $" + app.bankingTransferService.viewModel.transferInfo.data()[0].amount + " from your<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].fromacct + "</b><br />account to your<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].toacct + "</b><br />account ";
             
         	if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "0") {
         		tmp_str = tmp_str + "on " + app.bankingTransferService.viewModel.transferInfo.data()[0].startdate;
@@ -516,6 +519,8 @@
         		}
         		tmp_str = tmp_str + " from<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].startdate + " to " + app.bankingTransferService.viewModel.transferInfo.data()[0].enddate + "</b>.";
         	}
+            app.bankingTransferService.tranString = tmp_str;
+            tmp_str = "You are transfering" + tmp_str;
             document.getElementById("transferConfirm").innerHTML = tmp_str; 
 	    },
         
@@ -525,41 +530,8 @@
             
             console.log("before posted");
             //alert("confirm");
-            tmp_str = "Transfer $" + app.bankingTransferService.viewModel.transferInfo.data()[0].amount + " from your<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].fromacct + "</b><br />account to your<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].toacct + "</b><br />account ";
-            
-        	if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "0") {
-        		tmp_str = tmp_str + "on " + app.bankingTransferService.viewModel.transferInfo.data()[0].startdate;
-                tmp_str = tmp_str + "<br />Your <b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].fromacct + "</b> available balance is now " + app.bankingTransferService.viewModel.transferInfo.data()[0].frombalance + ".";
-                tmp_str = tmp_str + "<br />Your <b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].toacct + "</b> available balance is now " + app.bankingTransferService.viewModel.transferInfo.data()[0].tobalance + ".";                
-        	}
-        	else {
-                tmp_str = tmp_str + " and is scheduled<br />";
-        		if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "1") { //"Weekly":
-        			tmp_str = tmp_str + "Weekly occurring each ";
-        		}
-        		if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "2") { //"Bi-weekly":
-        			tmp_str = tmp_str + "Bi-weekly occurring every second ";
-                    //, (weekday_t)ibnk.dow);
-        		}
-        		if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "3") { //"Semi-monthly":
-        			tmp_str = tmp_str + "Semi-monthly occurring on the " + app.bankingTransferService.viewModel.transferInfo.data()[0].paymentdayofsemimonth + " and " + app.bankingTransferService.viewModel.transferInfo.data()[0].paymentdayofmonth + " day of each month";
-        		}
-        		if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "4") { //"Monthly":
-        			tmp_str = tmp_str + "Monthly occurring on the " + app.bankingTransferService.viewModel.transferInfo.data()[0].paymentdayofmonth + " day of each month";
-        		}
-        		if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "5") { //"Bi-monthly":
-        			tmp_str = tmp_str + "Bi-monthly occurring on the " + app.bankingTransferService.viewModel.transferInfo.data()[0].paymentdayofmonth + " day of every second month";
-        		}
-        		if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "6") { //"Quarterly":
-        			tmp_str = tmp_str + "Quarterly occurring on the " + app.bankingTransferService.viewModel.transferInfo.data()[0].paymentdayofmonth + " day of every third month";
-        		}
-        		if (app.bankingTransferService.viewModel.transferInfo.data()[0].schedule === "7") { //"Yearly":
-        			tmp_str = tmp_str + "Yearly occurring on ";
-                    //, (alphamonth_t)ibnk.months, " ", 
-                    tmp_str = tmp_str + app.bankingTransferService.viewModel.transferInfo.data()[0].paymentdayofmonth + " each year";
-        		}
-        		tmp_str = tmp_str + " from<br /><b>" + app.bankingTransferService.viewModel.transferInfo.data()[0].startdate + " to " + app.bankingTransferService.viewModel.transferInfo.data()[0].enddate + "</b>.";
-        	}
+            tmp_str = "<b>Reference: " + app.bankingTransferService.viewModel.transferInfo.data()[0].ref + "</b> Completed Transfer of" + app.bankingTransferService.tranString;
+
             document.getElementById("transferMessage").innerHTML = tmp_str; 
 	    } 
         

@@ -488,9 +488,11 @@
              data-model="app.bankingTransferService.viewModel">
             
             <div class="view-content">          
-                 
+                <p class="modalText">
+                    <span id="transferMessage" name="transferMessage"></span>
+                    <br />
+                </p>     
 
-            <div id="transferconfirm-listview" data-role="listview" data-auto-bind="false" data-bind="source: transferInfo" data-template="transferPosted-listview-template" data-style="inset"></div>            
                 <div class="buttonArea">     
                     <a data-role="button" href="#tabstrip-login" class="std-button">Continue</a>
                 </div>
@@ -739,13 +741,16 @@
         <div id="tabstrip-billpayposted"
              data-role="view"  
              data-title="Bill Payment"
-             data-init="app.bankingBillPayService.postedString"
+             data-show="app.bankingBillPayService.postedString"
              data-model="app.bankingBillPayService.viewModel">
             
             <div class="view-content">          
-                 
+                <p class="modalText">
+                <span id="billpayMessage" name="billpayMessage"></span>
+                <br />
+                </p> 
 
-            <div id="billpayconfirm-listview" data-role="listview" data-auto-bind="false" data-bind="source: billpayInfo" data-template="billpayPosted-listview-template" data-style="inset"></div>            
+            <!--div id="billpayconfirm-listview" data-role="listview" data-auto-bind="false" data-bind="source: billpayInfo" data-template="billpayPosted-listview-template" data-style="inset"></div-->         
                 <div class="buttonArea">     
                     <a data-role="button" href="#tabstrip-login" class="std-button">Continue</a>
                 </div>
@@ -757,8 +762,7 @@
             <p class="modalText">
                 <span id="billpayMessage" name="billpayMessage"></span>
                 <br />
-            </p>
-            
+            </p> 
 		</script>        
 
         <div id="tabstrip-statement"
