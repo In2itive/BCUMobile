@@ -4,7 +4,7 @@
 
     document.addEventListener("deviceready", function () {
         
-        app.application = new kendo.mobile.Application(document.body, { layout: "tabstrip-layout" });
+        app.application = new kendo.mobile.Application(document.body, { layout: "tabstrip-layout", statusBarStyle: "black-translucent"});
         app.application.skin("flat");
         app.appType = localStorage.getItem("appType");
         

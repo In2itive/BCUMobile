@@ -63,15 +63,21 @@ min-height: 33%;
 .homechild {
     position: absolute;
     top: 50%;
-    left: 0;
+  
     height: 30%;
     width: 95%;
     max-width: 520px;
-    margin: -20% 0 0 2.5%;
+    
     text-align:center;
     font-size: 1.4em;
     font-weight:100;
     color:White;
+    
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
 }
 
 
