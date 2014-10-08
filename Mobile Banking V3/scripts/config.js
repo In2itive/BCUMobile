@@ -32,7 +32,7 @@
         if(app.appType === "UAT") {
             return "http://66.252.148.81";
         }
-        return "http://dev.in2itive.ca";
+        return "https://dev.in2itive.ca";
     }
     
     app.openSettings = function (e) {

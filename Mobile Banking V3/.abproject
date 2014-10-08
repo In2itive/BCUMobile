@@ -1,7 +1,7 @@
 {
   "ProjectGuid": "c60b2a0b-7221-4c6a-a93c-a44c8d2435bd",
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
-  "AppIdentifier": "com.telerik.MobileBankingV3",
+  "AppIdentifier": "com.buduchnist.mobilebanking",
   "ProjectName": "Mobile Banking V3",
   "IsRunnable": "true",
   "FrameworkVersion": "3.5.0",
@@ -53,7 +53,7 @@
   "BundleVersion": "1.0",
   "DisplayName": "BCU Mobile Banking",
   "Author": "In2itive Enterprises Inc.",
-  "Description": "Mobile Banking V3",
+  "Description": "Mobile Banking V1.0",
   "Framework": "Cordova",
   "iOSDeviceFamily": [
     "1",
@@ -67,5 +67,10 @@
   "WP8Publisher": "",
   "WP8SupportedResolutions": [],
   "WP8Capabilities": [],
-  "WP8Requirements": []
+  "WP8Requirements": [],
+  "CordovaPluginVariables": {
+    "com.telerik.mobiletesting": {
+      "IOS_APP_URL": ""
+    }
+  }
 }
