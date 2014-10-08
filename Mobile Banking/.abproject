@@ -2,7 +2,7 @@
   "ProjectGuid": "c60b2a0b-7221-4c6a-a93c-a44c8d2435bd",
   "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
   "AppIdentifier": "com.buduchnist.mobilebanking",
-  "ProjectName": "Mobile Banking V3",
+  "ProjectName": "Mobile Banking",
   "IsRunnable": "true",
   "FrameworkVersion": "3.5.0",
   "AndroidPermissions": [
