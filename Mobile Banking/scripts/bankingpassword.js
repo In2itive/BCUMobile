@@ -4,6 +4,7 @@
     
     BankingPasswordViewModel = kendo.observable({      
         passwordInfo: new kendo.data.DataSource({
+            requestStart: app.doRequestStart,
             transport: {
                 read: {
                         type: "POST",
@@ -15,6 +16,7 @@
                 },
                 parameterMap: function (data, operation) {
                     //return kendo.stringify(data);
+                    console.log("map sched: data=" + kendo.stringify(data) + " SessionID=" + app.loginService.viewModel.get("SessionID").trim());
                     
                     return kendo.stringify({"Trxn":	  "pwc",
                         "Access":	 "Process",
@@ -34,6 +36,7 @@
                         password: { type: "string" },
                         newpassword: { type: "string" }, 
                         confirmpassword: { type: "string" },
+                        force: { type: "boolean" },
                         ref: { type: "string" },
                         info: { type: "string" },
                         error: { type: "string" }
@@ -49,7 +52,8 @@
                     if (data.length > 0 ) {
                         var errorCode = parseInt(data[0].get("ErrorCode"));
                         app.loginService.viewModel.set("SessionID", data[0].get("SessionID"));
-                        app.loginService.viewModel.set("Sequence ", data[0].get("Sequence"));
+                        app.loginService.viewModel.set("Sequence", data[0].get("Sequence"));
+                        
                         
         				if (errorCode > 0 ) {
                             // we have an error to process
@@ -58,6 +62,7 @@
                         }
                         else {
                             // Set the session info
+                            app.loginService.viewModel.set("isLoggedIn", true);
                             
                         }
                         
@@ -111,12 +116,20 @@
         beforeShow: function (beforeShowEvt) {
             console.log("before PWC");
             
+            //if (app.test.abc === "1") {
+                
+            //}
+            var isForce = false;
+            if ( app.loginService.viewModel.get("ExtraData").trim().indexOf("Change Pass") >= 0 ) {
+                isForce = true;
+            }
+            
             var myDS = app.bankingPasswordService.viewModel.passwordInfo;
             if (myDS.data().length > 0) 
             {
             	myDS.remove(myDS.data()[0]);
             }       
-            myDS.add({ newpassword: "", confirmpassword: "" });
+            myDS.add({ newpassword: "", confirmpassword: "", force: isForce });
              
         },
        
@@ -179,7 +192,9 @@
             else 
             {
                 app.loginService.viewModel.set("SessionID", app.bankingPasswordService.viewModel.passwordInfo.data()[0].get("SessionID"));
-                app.loginService.viewModel.set("Sequence ", app.bankingPasswordService.viewModel.passwordInfo.data()[0].get("Sequence"));
+                app.loginService.viewModel.set("Sequence", app.bankingPasswordService.viewModel.passwordInfo.data()[0].get("Sequence"));
+                app.loginService.viewModel.set("ExtraData", app.bankingPasswordService.viewModel.passwordInfo.data()[0].get("ExtraData"));
+                app.loginService.viewModel.set("isLoggedIn", true);
             	app.application.navigate('#tabstrip-login');
             }
             console.log("Submit - end");

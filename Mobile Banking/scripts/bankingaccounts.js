@@ -59,6 +59,7 @@
                 	}
             	},
                 group: { field: "group" },
+                sort:  { field: "order", dir: "asc" },
                 fetch: function(e) {
                 
                 	//var that = this;
@@ -73,15 +74,22 @@
                         	// Set these fields for the sake of the template
                             data[0].set("group", " " );
                             data[0].set("product", " " );
-                            data[0].set("balance", "0.00" );
-                            
+                            data[0].set("balance", "0.00" );                         
                             
                         }
                     }
                     else {
                         // need to track this
                     }
-                }    
+                },
+                error: function(e) {
+                    console.log(e.errors); // displays "Invalid query"
+                    message = "Connection failure. Please try again later.";
+                    app.errorService.viewModel.setError(0101, "General Error", message);
+
+                    $("#modalview-error").data("kendoMobileModalView").open();            
+                    return false;                    
+                }
         }),
        
         beforeshow: function (e) {

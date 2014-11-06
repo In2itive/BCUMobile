@@ -103,6 +103,19 @@ min-height: 33%;
     /*display:inline-block;  */
 }
 
+#tabstrip-home .mainbuild {
+    width:90%;
+    max-width: 500px;
+    height:77px;
+    margin: 0 auto;
+    text-align:center;
+    vertical-align: bottom;
+    color: #99aabb;
+    font-size:.7em;
+    
+    /*display:inline-block;  */
+}
+
 /* COMMON STYLES*/
 .view-content h1{
     color:#42454a;
@@ -163,8 +176,18 @@ min-height: 33%;
     border-radius: 6px 6px 6px 6px;
     margin: 0.7em 0.7em;
     padding: 0.2em 0.7em;
-    background-color: rgba(255, 0, 0, 0.1);
+    background-color: rgba(255, 0, 0, 0.5);
     border:1px solid Red;
+    color: Black;
+    font-weight: 200;
+}
+.warningArea {
+    text-align: center;
+    border-radius: 6px 6px 6px 6px;
+    margin: 0.7em 0.7em;
+    padding: 0.2em 0.7em;
+    background-color: rgba(255, 255, 0, 0.2);
+    border:1px solid Orange;
     color: Black;
     font-weight: 200;
 }
@@ -184,6 +207,7 @@ min-height: 33%;
     font-weight: 200;
     text-align: center;
     line-height: 1.4em;
+    word-break:break-word;
 }
 .errorText2 {
     font-size: .9em;
@@ -191,12 +215,14 @@ min-height: 33%;
     text-align: center;
     color:#42454a;
     line-height: 1.3em;
+    word-break:break-word;
 }
 .errorText3 {
     font-size: .8em;
     font-weight: 200;
     text-align: center;
     line-height: 1.2em;
+    word-break:break-word;
 }
 
 
@@ -705,15 +731,6 @@ visibility: visible;
     right:10px;
 }
 
-#modal-transferconfirm {
-    width: 90%; 
-    height: 28em;    
-}
-
-#modal-billpayconfirm {
-    width: 90%; 
-    height: 28em;    
-}
 
 #transferconfirm-button,
 #modalview-submit-button,

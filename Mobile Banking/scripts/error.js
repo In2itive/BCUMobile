@@ -34,7 +34,12 @@
             that.set("errorCancel", ""); 
             that.set("errorBack", ""); 
             
-            if(rcErrCat === 10) {
+            if(rcErrCat < 10) {
+                that.set("errorStr", "<em>- ALERT -</em>");
+                that.set("errorStr2", errorDetail);
+                that.set("errorCancel", "Continue");
+            }
+            else if(rcErrCat === 10) {
                 that.set("errorStr", "There are <em>errors</em> on this form.");
                 that.set("errorStr2", errorDetail);
                 that.set("errorCancel", "Continue");

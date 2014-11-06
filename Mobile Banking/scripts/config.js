@@ -48,8 +48,6 @@
     app.setTypeProd = function (e) {
         app.appType = "Prod";
         $('#apptype').val(app.appType);
-        alert(app.loginService.viewModel.transport.options.read.url);
-        
     }
     app.setTypeUAT = function (e) {
         app.appType = "UAT";

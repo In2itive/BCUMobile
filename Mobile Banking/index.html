@@ -53,9 +53,8 @@
                 <div class="homechild">
                     <div class="mainlogo"></div>
                     <div class="mainmobile"></div>
-                </div>
-
-                
+                    <div class="mainbuild"><br><span id="buildNum">xx</span></div>
+                </div>       
                
                 <!--ul data-role="listview" id="announcements-listview" 
 					data-style="inset"  data-template="announcement-listview-template" data-bind="source: announcementsDataSource">
@@ -101,7 +100,8 @@
         <div id="tabstrip-login" 
              data-role="view"  
              data-title="Banking" 
-             data-model="app.loginService.viewModel">
+             data-model="app.loginService.viewModel"
+             data-show="app.loginService.viewModel.show">
 
             <div class="view-content">
                 <div class="logo"></div>
@@ -459,6 +459,7 @@
         </div>
         
         <div id="modal-transferconfirm"
+             style="width: 90%; height: 306px;"
              data-role="modalview"  
              data-title="Confirm Transfer"
              data-open="app.bankingTransferService.confirmString"
@@ -538,7 +539,7 @@
         <!-- Scheduled View templates -->
         <script type="text/x-kendo-template" id="scheduled-listview-template">
             <a class="banking-account-link">
-                <span class="blue">${toacct}</span><br>
+                <span class="blue">#= toacct #</span><br />
                 <div class="account-balance">
                   ${schedule} for ${amount}
                 </div>
@@ -716,6 +717,7 @@
         </div>
 
         <div id="modal-billpayconfirm"
+             style="width: 90%; height: 306px;"
              data-role="modalview"  
              data-title="Confirm Bill Payment"
              data-open="app.bankingBillPayService.confirmString"
@@ -955,11 +957,15 @@
             </header>
 
             <form>
+                <div class="warningArea" data-bind="visible: passwordInfo.data()[0].force">
+                	<span>You must reset your password to proceed.</span>
+				</div>
                 <ul data-role="listview" data-auto-bind="false" data-style="inset" onclick="">
                     <li>
-                        <label>Password
+                        <!--label>Password
                             <input type="text" data-bind="value: passwordInfo.data()[0].password"/>
-                        </label>
+                        </label-->
+                        <span class="blue">&nbsp;&nbsp;&nbsp;&nbsp;Enter and confirm a new password.</span>
                     </li>
                     <li>
                         <label>New Password
@@ -1142,7 +1148,7 @@
                 </div>
             </div>
             <ul data-role="listview" data-style="inset">
-                <li style="height: 130px;">
+                <li style="height: 165px;">
                     <div class="errorBox">
                         <span class="errorText" data-bind="html: errorStr"></span><br>
                         <span class="errorText2" data-bind="html: errorStr2"></span><br>
@@ -1151,10 +1157,7 @@
                     </div>
                 </li>
             </ul>            
-            
 
-
-            <a data-click="app.errorService.viewModel.clickCancel" id="modalview-login-button" type="button" data-role="button">close</a>
         </div>  
         
     </body>

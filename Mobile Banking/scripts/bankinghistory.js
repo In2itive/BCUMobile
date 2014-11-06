@@ -110,6 +110,7 @@
                 if(returnError === "1100" || returnError === "1101") {
                     dataSrc.data()[0].description = "No transactions on file.";
                     dataSrc.data()[0].amount = " ";
+                    dataSrc.data()[0].group = " ";
                     dataSrc.data()[0].effective = " " ;
                     dataSrc.add({ description: "0", amount: "0", effective: " " });
                     if (dataSrc.data().length > 1) 

@@ -57,6 +57,33 @@
                             nickname: { type: "string" }
                         }
                     }
+                },
+                fetch: function(e) {
+                
+                	//var that = this;
+                    var data = this.data();
+                    console.log("accounts length = " + data.length);  
+               	 
+                    if (data.length > 0 ) {
+                        var errorCode = parseInt(data[0].get("ErrorCode"));
+                        
+        				if (errorCode > 0 ) {
+                            // we have an error to process
+                        	// Set these fields for the sake of the template
+                            
+                        }
+                    }
+                    else {
+                        // need to track this
+                    }
+                },            
+                error: function(e) {
+                    console.log(e.errors); // displays "Invalid query"
+                    message = "Connection failure. Please try again later.";
+                    app.errorService.viewModel.setError(0101, "General Error", message);
+
+                    $("#modalview-error").data("kendoMobileModalView").open();            
+                    return false;                    
                 }
         }),
      
@@ -68,7 +95,22 @@
         listViewInit: function (initEvt) {
             console.log("listViewInit run");
             app.bankingVendorsService.viewModel.bankingVendorsDataSource.read();
-            //app.bankingVendorsService.viewModel.bankingVendorsDS.read();
+            
+            app.bankingVendorsService.viewModel.bankingVendorSelected = null;
+            
+            var returnError = app.bankingVendorsService.viewModel.bankingVendorsDataSource.data()[0].ErrorCode;
+            if ( returnError === null ) returnError = 0;
+            
+            if (returnError > 0) {
+                console.log(returnError);
+                app.errorService.viewModel.setError(returnError);
+               
+                $("#modalview-error").data("kendoMobileModalView").open();
+                if(returnError === "3107" || returnError === "3108" || returnError === "3110") 
+                {
+                    app.loginService.viewModel.onLogout();
+                }
+            } 
             
             initEvt.view.element.find("#list-edit-listview").kendoMobileListView({
                 dataSource: app.bankingVendorsService.viewModel.bankingVendorsDataSource,
@@ -88,7 +130,8 @@
         navigate: function (e) {
             var itemUID = $(e.touch.currentTarget).data("uid");
             app.bankingVendorsService.viewModel.bankingVendorSelected = app.bankingVendorsService.viewModel.bankingVendorsDataSource.getByUid(itemUID);
-            kendo.mobile.application.navigate("#vendor-detailview?uid=" + itemUID);
+            //kendo.mobile.application.navigate("#vendor-detailview?uid=" + itemUID);
+            kendo.mobile.application.navigate("#vendor-detailview");
         },
 
         swipe: function (e) {

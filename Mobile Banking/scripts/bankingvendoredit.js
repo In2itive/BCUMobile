@@ -140,6 +140,33 @@
                             showdelete: {type: "boolean"}
                         }
                     }
+                },
+                fetch: function(e) {
+                
+                	//var that = this;
+                    var data = this.data();
+                    console.log("accounts length = " + data.length);  
+               	 
+                    if (data.length > 0 ) {
+                        var errorCode = parseInt(data[0].get("ErrorCode"));
+                        
+        				if (errorCode > 0 ) {
+                            // we have an error to process
+                        	// Set these fields for the sake of the template
+                            
+                        }
+                    }
+                    else {
+                        // need to track this
+                    }
+                },            
+                error: function(e) {
+                    console.log(e.errors); // displays "Invalid query"
+                    message = "Connection failure. Please try again later.";
+                    app.errorService.viewModel.setError(0101, "General Error", message);
+
+                    $("#modalview-error").data("kendoMobileModalView").open();            
+                    return false;                    
                 }
         })        
     });  
@@ -152,25 +179,33 @@
             var myDS = app.bankingVendorEditService.viewModel.bankingVendorEditDataSource;
             var setShowDelete = false;
             
-            if (myDS.data().length > 0) 
+            console.log("vendor - beforeShow");
+            
+            while (myDS.data().length > 0) 
             {
             	myDS.remove(myDS.data()[0]);
             }
-            if (model.number > "") {
+            if (model !== null && model.number > "") {
                 setShowDelete = true;
-            }
-            myDS.add({ name: model.name, vendor: model.vendor, number: model.number, origno: model.number, nickname: model.nickname, showdelete: setShowDelete });                         
             
+                myDS.add({ name: model.name, vendor: model.vendor, number: model.number, origno: model.number, nickname: model.nickname, showdelete: setShowDelete });                         
+            }
+            else {
+                myDS.add({ name: "", vendor: "", number: "", origno: "", nickname: "", showdelete: setShowDelete });                         
+            }
 		    app.bankingVendorEditService.viewModel.bankingVendorsDS.read();
             app.bankingVendorsService.viewModel.bankingVendorSelected = {};
         },
         
         init: function (e) {
             //var view = e.view;
+            console.log("vendor - init");
             
         },
         show:  function (e) {
             var model = app.bankingVendorEditService.viewModel;
+            
+            console.log("vendor - show");
             kendo.bind(e.view.element, model, kendo.mobile.ui);
         },
         save: function (e) {
@@ -265,6 +300,8 @@
             }
             else 
             {
+                
+                console.log("vendor - delete is complete");
             	app.application.navigate('#tabstrip-vendor');
             	
             }

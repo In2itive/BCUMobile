@@ -28,12 +28,17 @@
                 //app.application.navigate("#modalview-error");
                 return;
             }
+            
+            if (app.doRequestStart() === false) {
+                return;
+            }
 
-            app.application.showLoading();   
+            //app.application.showLoading();   
             
             //kendo.data.ObservableObject.fn.init.apply(that, []);  keep this out, it seems to mess it up
             
             dataSource = new kendo.data.DataSource({
+                
                 transport: {
                    read: {
                         type: "POST",
@@ -64,10 +69,19 @@
         					
                         }
                     }
+                },
+                error: function(e) {
+                    console.log(e.errors); // displays "Invalid query"
+                    message = "Connection failure. Please try again later.";
+                    app.errorService.viewModel.setError(0101, "General Error", message);
+
+                    $("#modalview-error").data("kendoMobileModalView").open();            
+                    return false;                    
                 }
                 
             });
             
+ 
             dataSource.fetch (function(){
             	//var that = this;
                 var data = this.data();
@@ -80,7 +94,12 @@
                     that.set("Sequence ", data[0].get("Sequence"));
                     that.set("ExtraData", data[0].get("ExtraData"));
                     that.set("ErrorCode", data[0].get("ErrorCode")); 
+                    that.set("isLoggedIn", true);
                     
+                    //set for testing...
+                    if(app.appType === "Prod") {
+                        //that.set("ExtraData", "Change Password");
+                    }
                     
                     if (parseInt(data[0].get("ErrorCode")) > 0 ) {
                         that.set("isLoggedIn", false);
@@ -96,18 +115,28 @@
                         that.set("passwd", "");
                         that.set("ErrorMessage", "Login failed, re-enter your ID and Password");
                     }
-                    else {
-                        that.set("isLoggedIn", true);
+
+                    else if (that.get("ExtraData").indexOf("Change Password") >= 0 ) {
+                        that.set("loginDataSource", dataSource); 
+                        app.application.navigate("#tabstrip-password");
+                        that.set("username", "");
+                        that.set("passwd", "");
+                        that.set("isLoggedIn", false);
                         that.set("ErrorMessage", "");
+                    }
+                    else {
+                        that.set("ErrorMessage", "");
+                        that.set("isLoggedIn", true);
                     }
                 }
             });
             
             
-            
             //dataSource.read();
         
+
             that.set("loginDataSource", dataSource); 
+            
         },
         onLogout: function () {
             var that = this;
@@ -123,6 +152,13 @@
             that.set("username", "");
             that.set("CustID", "");
             that.set("passwd", "");
+        },
+        show: function () {
+            
+            console.log("login show");
+            if ( app.loginService.viewModel.get("ExtraData").trim().indexOf("Change Pass") >= 0 ) { 
+                app.loginService.viewModel.set("CustID", "");
+            }
         }
     });
     
