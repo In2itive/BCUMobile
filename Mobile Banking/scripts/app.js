@@ -25,7 +25,7 @@
             timeout: 3000 //Time in milliseconds
         });
         
-        $("#buildNum").html("Build 1411.05.1");
+        $("#buildNum").html("Build 1412.22.2");
         
     }, false);
     
@@ -67,11 +67,8 @@
             $("#modalview-error").data("kendoMobileModalView").open();            
             return false;
         }
+        
         return true;
-    };
-    
-    app.getBuildNumber = function () {
-        $("#buildNum").text = "1410.28.1";
     };
     
     app.testshow = function (e) {

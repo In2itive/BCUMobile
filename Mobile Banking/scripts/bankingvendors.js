@@ -25,18 +25,22 @@
                         	return kendo.stringify({"Trxn":	  "vdr", 
                                "Access":	 "Edit",
                                "EditRow":  data.EditRow,
-                               "CustID":     app.loginService.viewModel.get("CustID").trim(), 
+                               "CustID":     app.loginService.viewModel.get("CustID").trim(),, 
                                "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                               "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                               "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                     	}*/
                         
                         return kendo.stringify({"Trxn":	  "vdr", 
                                "Access":	  "FrAc",
                                "FrAccount":    "first",
                                "Pos":		"0",
-                               "CustID":     app.loginService.viewModel.get("CustID").trim(), 
+                               "CustID":     app.loginService.viewModel.get("CustID").trim(),
                                "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                               "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                               "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                     },
                     update: {
                         url: "data/billAccounts.json",

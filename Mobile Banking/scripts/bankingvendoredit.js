@@ -9,9 +9,11 @@
                 /*read: function(options) {
                     var myData = kendo.stringify({"Trxn":	  "vdr", 
                            "Access":	  "ToAc",
-                           "CustID":     app.loginService.viewModel.get("CustID").trim(), 
+                           "CustID":     app.loginService.viewModel.get("CustID").trim(),, 
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                           "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) ;
+                           "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) ;
                     $.ajax({
                         type: "POST",
                         crossDomain:true,
@@ -49,7 +51,9 @@
                            "Access":	  "ToAc",
                            "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                           "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                           "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                 } 
 
             },
@@ -94,7 +98,9 @@
                                    //"ExtraData":    data.number + " " + data.nickname,
                                    "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                                    "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                                   "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                                   "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                         }
                         else if (data.origno > "") {
                             return kendo.stringify({"Trxn":	  "vdr", 
@@ -105,7 +111,9 @@
                                    "ExtraData":    data.number + " " + data.nickname,
                                    "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                                    "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                                   "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                                   "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                         }
                         else{
                             return kendo.stringify({"Trxn":	  "vdr", 
@@ -116,7 +124,9 @@
                                    "ExtraData":    data.nickname,
                                    "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                                    "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                                   "Sequence":   app.loginService.viewModel.get("Sequence").trim()})                             
+                                   "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID})                             
                         }
                     },
                     update: {

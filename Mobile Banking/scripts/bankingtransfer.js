@@ -26,7 +26,9 @@
                            "EditRow":  data.EditRow,
                            "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                           "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                           "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                     }
                     
                     return kendo.stringify({"Trxn":	  "trn",
@@ -50,7 +52,9 @@
 						"Year2" :	data.Year2,
                         "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                         "SessionID":  app.loginService.viewModel.get("SessionID").trim(),
-                        "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                        "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                 }
             },
             schema: {
@@ -99,7 +103,9 @@
                            "Access":	 "FrAc",
                            "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                           "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                           "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                 }
             },
             schema: {
@@ -131,7 +137,9 @@
                            "Access":	 "ToAc",
                            "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
-                           "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                           "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                 }
             },
             schema: {

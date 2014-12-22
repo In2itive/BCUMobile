@@ -24,6 +24,8 @@
     }
     
     app.appType = "Dev";
+    app.ipAddress = "0";
+    app.deviceID = "0";
     
     app.getURL = function() {
         if(app.appType === "Dev") {

@@ -12,6 +12,8 @@
         ErrorCode: "0",
         ErrorMessage: "",
         isLoggedIn: false,
+        ipAddress: "",
+        diviceID: "",
 
         onLogin: function () {
             var that = this,
@@ -49,12 +51,20 @@
                         url: function(options) { return app.getURL() + "/IbnkWcf/service1.svc/JSONService"; },
                         dataType: "json",
                         async: false,
-                        data: {"Trxn": "ver", "CustID": username, "Passwd": passwd},
+                        //data: {"Trxn": "ver", "CustID": username, "Passwd": passwd},
                     },
                     
                     parameterMap: function (data, operation) {
-                        return kendo.stringify(data);
-                    }
+                        //return kendo.stringify(data);
+                        console.log("login: data=" + kendo.stringify(data) + " IP=" + app.ipAddress);
+                        console.log("login: custID=" + app.loginService.viewModel.get("CustID").trim());
+                        
+                        return kendo.stringify({"Trxn":	  "ver",
+                            "Passwd" :	app.loginService.viewModel.get("passwd").trim(),
+                            "CustID":     app.loginService.viewModel.get("CustID").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
+                     }   
                 },
                 schema: {
                     model: {
@@ -159,6 +169,14 @@
             if ( app.loginService.viewModel.get("ExtraData").trim().indexOf("Change Pass") >= 0 ) { 
                 app.loginService.viewModel.set("CustID", "");
             }
+        
+            $.ajax({jsonp: 'jsonp',
+              dataType: 'jsonp',
+              url: 'http://myexternalip.com/json',
+              success: function(myip) {app.ipAddress = myip; }
+            });        
+            
+            app.deviceID = device.uuid;
         }
     });
     

@@ -25,7 +25,9 @@
                         "Button" :	"OK",
                         "CustID":     app.loginService.viewModel.get("CustID").trim(), 
                         "SessionID":  app.loginService.viewModel.get("SessionID").trim(),
-                        "Sequence":   app.loginService.viewModel.get("Sequence").trim()}) 
+                        "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
+                            "ClientIP":   app.ipAddress,
+                            "ClientID":   app.deviceID}) 
                 }
             },
             schema: {
@@ -82,8 +84,8 @@
         init: function (initEvt) {         
             //app.bankingPasswordService.viewModel.passwordInfo.read();
             
-            var x = 1;
-            var view = initEvt.view;
+            //var x = 1;
+            //var view = initEvt.view;
             
             /*
             view.element.find("#pwdone").data("kendoMobileButton").bind("click", function() {
