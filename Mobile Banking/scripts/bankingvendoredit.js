@@ -13,7 +13,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) ;
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) ;
                     $.ajax({
                         type: "POST",
                         crossDomain:true,
@@ -53,7 +53,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                 } 
 
             },
@@ -100,7 +100,7 @@
                                    "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                                    "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                         }
                         else if (data.origno > "") {
                             return kendo.stringify({"Trxn":	  "vdr", 
@@ -113,7 +113,7 @@
                                    "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                                    "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                         }
                         else{
                             return kendo.stringify({"Trxn":	  "vdr", 
@@ -126,7 +126,7 @@
                                    "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                                    "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID})                             
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum})                             
                         }
                     },
                     update: {

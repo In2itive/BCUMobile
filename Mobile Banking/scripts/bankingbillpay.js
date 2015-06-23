@@ -28,7 +28,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                     }
                     
                 	return kendo.stringify({"Trxn":	  "bpy",
@@ -54,7 +54,7 @@
                         "SessionID":  app.loginService.viewModel.get("SessionID").trim(),
                         "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                 }
             },
             schema: {
@@ -102,7 +102,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                 }
             },
             schema: {
@@ -138,7 +138,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                 }
             },
             schema: {
@@ -178,7 +178,7 @@
             {
             	myDS.remove(myDS.data()[0]);
             }            
-            myDS.add({ schedule: "0", startdate: new Date(), enddate: new Date() });
+            myDS.add({ fromacct: "", toacct: "", schedule: "0", startdate: new Date(), enddate: new Date() });
             
             if (app.bankingBillPayService.editRow > "" )
             {

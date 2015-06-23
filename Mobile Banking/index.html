@@ -46,11 +46,13 @@
             <div class="view-content">
                 <div class="onethird">
                      <!--a id="skin-change" data-role="button" data-click="app.changeSkin">Flat</a-->
-                    <a data-role="button" data-rel="modalview" data-click="app.openSettings" id="skin-change">Settings</a>
-
+                    
                 </div>
                         
-                <div class="homechild">
+                <div class="homechild"id="touchSurface"
+                    data-role="touch"
+                    data-hold="app.openSettings"
+                    >
                     <div class="mainlogo"></div>
                     <div class="mainmobile"></div>
                     <div class="mainbuild"><br><span id="buildNum">xx</span></div>
@@ -88,8 +90,13 @@
                     <span>App Settings</span>
                 </div>
             </div>
-            <label for="apptype">App Type:</label>  
-            <input id="apptype" name="apptype" />     
+                <ul data-role="listview">
+                    <li>
+                        <label for="apptype">App Type:
+                            <input id="apptype" name="apptype" />  
+                        </label>  
+                    </li>
+                </ul>
             <a data-click="app.setTypeProd" class="full-button" type="button" data-role="button">Set to Prod</a>               
             <a data-click="app.setTypeUAT" class="full-button" type="button" data-role="button">Set to UAT</a>               
             <a data-click="app.setTypeDev" class="full-button" type="button" data-role="button">Set to Dev</a>  <br />             
@@ -105,14 +112,15 @@
 
             <div class="view-content">
                 <div class="logo"></div>
-                <h3 data-bind="invisible: isLoggedIn">Enter your login information:</h3>
+                <h3 data-bind="invisible: isLoggedIn">Welcome to BCU Mobile Banking.</h3>
+                <h5 data-bind="invisible: isLoggedIn">Enter your bank card number and password to login.</h5>
                 <h3 class="welcome" data-bind="visible: isLoggedIn">Select Banking Function:</h3>
 
                 <ul data-role="listview" data-style="inset" data-bind="invisible: isLoggedIn">
                     <li>
-                        <label >
+                        <label>
                             <div style="width:50%">
-                            ID <span class="normalText" style="float:right">5818280675</span>
+                            Card #<span class="normalText" style="float:right">5818280675</span>
                             </div>
                             <input type="text" data-bind="value: CustID"/>
                             
@@ -294,6 +302,7 @@
              data-title="Transfer"
              data-auto-bind="false" 
              data-before-show="app.bankingTransferService.beforeShow"
+             data-show="app.bankingTransferService.show"   
              data-model="app.bankingTransferService.viewModel">
             
             <header data-role="header">
@@ -1040,6 +1049,21 @@
                 <h3 class="item-title">#: data.name #</h3>
                 <p class="item-info">#: data.address1 #<br />
                 #: data.address2 #</p>
+                <p class="item-info2">
+
+                #if (data.phone.value != 'null' && data.phone.value != '')  { #
+                      <span class="loclable">#=data.phone.label#</span>&nbsp;&nbsp;<a href="tel:#=data.phone.link#" data-rel="external">#=data.phone.value# </a>
+                # } #
+                #if (data.tollfree.value != 'null' && data.tollfree.value != '')  { #
+                      <br /><span class="loclable">#=data.tollfree.label#</span>&nbsp;&nbsp;<a href="tel:#=data.tollfree.link#" data-rel="external">#=data.tollfree.value# </a>
+                # } #
+                #if (data.fax.value != 'null' && data.fax.value != '')  { #
+                      <br /><span class="loclable">#=data.fax.label#</span>&nbsp;&nbsp;<a href="tel:#=data.fax.link#" data-rel="external">#=data.fax.value# </a>
+                # } #
+                #if (data.manager.value != 'null' && data.manager.value != '')  { #
+                      <br /><span class="loclable">#=data.manager.label#</span>&nbsp;&nbsp;#=data.manager.value#
+                # } #            
+                </p>
                 <div class="item-box">
                     <a data-role="button" data-rel="modalview" href="\#modal-branchhours" data-hours="#: data.uid #" class="left-button">Branch Hours</a>
                     <a data-role="button" class="right-button" data-click="app.locationService.clickMapit" data-lat="#: data.latitude #" data-lng="#: data.longitude #">Map Location</a>
@@ -1054,10 +1078,14 @@
              data-init="app.locationService.initHours"
              data-open="app.locationService.modalHours"
              data-model="app.locationService.viewModel"
-             style="width: 80%">            
+             style="width: 90%; height: 80%;">  
+            
             <div data-role="header">
-                <div data-role="navbar">
-                    <span>Hours</span>
+                <div data-role="header">
+                    <div data-role="navbar">
+                        <a data-click="app.locationService.closeHours" data-role="button" data-align="left">Back</a>
+                        <span>Hours</span>
+                    </div>
                 </div>
             </div>
             
@@ -1070,7 +1098,6 @@
                 <li id="hours6"><span class="hourLabel">l6</span><span class="hourItem">i6</span></li>
                 <li id="hours7"><span class="hourLabel">w</span><span class="hourItem">w</span></li>
             </ul>  
-            <a data-click="app.locationService.closeHours" id="modalview-back-button" type="button" data-role="button">Back</a>
         </div> 
         
 		<script type="text/x-kendo-template" id="branchHours-modal-template">

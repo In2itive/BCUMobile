@@ -16,7 +16,7 @@
         app.appType = localStorage.getItem("appType");
         
         if (app.appType === undefined || app.appType === null || app.appType === "null") {
-			app.appType = "Dev";
+			app.appType = "Prod";
 		}
         
         console.log(localStorage.getItem("appType"));
@@ -25,7 +25,7 @@
             timeout: 3000 //Time in milliseconds
         });
         
-        $("#buildNum").html("Build 1412.22.2");
+        $("#buildNum").html("Build " + app.buildNum); // set build number in config.js
         
     }, false);
     

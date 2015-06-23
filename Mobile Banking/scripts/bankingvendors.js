@@ -29,7 +29,7 @@
                                "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                                "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                     	}*/
                         
                         return kendo.stringify({"Trxn":	  "vdr", 
@@ -40,7 +40,7 @@
                                "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                                "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                     },
                     update: {
                         url: "data/billAccounts.json",

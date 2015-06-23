@@ -14,6 +14,7 @@
         isLoggedIn: false,
         ipAddress: "",
         diviceID: "",
+        buildNum: "",
 
         onLogin: function () {
             var that = this,
@@ -63,7 +64,8 @@
                             "Passwd" :	app.loginService.viewModel.get("passwd").trim(),
                             "CustID":     app.loginService.viewModel.get("CustID").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID,
+                            "BuildNum":   app.buildNum}) 
                      }   
                 },
                 schema: {
@@ -111,12 +113,24 @@
                         //that.set("ExtraData", "Change Password");
                     }
                     
+                    returnError = parseInt(data[0].get("ErrorCode"))
                     if (parseInt(data[0].get("ErrorCode")) > 0 ) {
                         that.set("isLoggedIn", false);
                         that.set("username", "");
                         that.set("CustID", "");
                         that.set("passwd", "");
                         that.set("ErrorMessage", "Login failed, re-enter your ID and Password");
+                        
+                        if (returnError === 3113) {
+                            console.log(returnError);
+                            app.errorService.viewModel.setError(returnError);
+                           
+                            $("#modalview-error").data("kendoMobileModalView").open();
+                            if(returnError === "3107" || returnError === "3108" || returnError === "3110") 
+                            {
+                                app.loginService.viewModel.onLogout();
+                            }
+                        }                      
                     }
                     else if (parseInt(data[0].get("Sequence")) < 1 ) {
                         that.set("isLoggedIn", false);
@@ -173,7 +187,8 @@
             $.ajax({jsonp: 'jsonp',
               dataType: 'jsonp',
               url: 'http://myexternalip.com/json',
-              success: function(myip) {app.ipAddress = myip; }
+              success: function(myip) {app.ipAddress = myip; },
+              error: function(xhr, textStatus, errorThrown){ app.ipAddress = "99.99.99.99" }
             });        
             
             app.deviceID = device.uuid;

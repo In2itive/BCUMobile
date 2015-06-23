@@ -28,7 +28,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                     }
                     
                     return kendo.stringify({"Trxn":	  "trn",
@@ -54,7 +54,7 @@
                         "SessionID":  app.loginService.viewModel.get("SessionID").trim(),
                         "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                 }
             },
             schema: {
@@ -105,7 +105,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                 }
             },
             schema: {
@@ -139,7 +139,7 @@
                            "SessionID":  app.loginService.viewModel.get("SessionID").trim(), 
                            "Sequence":   app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID}) 
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum}) 
                 }
             },
             schema: {
@@ -179,7 +179,7 @@
             {
             	myDS.remove(myDS.data()[0]);
             }
-            myDS.add({ schedule: "0", startdate: new Date(), enddate: new Date() });
+            myDS.add({ fromacct: "", toacct: "", schedule: "0", startdate: new Date(), enddate: new Date() });
          
             
             if (app.bankingTransferService.editRow > "")
@@ -192,8 +192,13 @@
             app.bankingTransferService.formdisp($("#transferSchedule"));          
              
         },
-        show: function (showEvt) {
+        show: function (e) {
+            
+            var model = app.bankingTransferService.viewModel;
+            
             console.log("show transfer-");
+            kendo.bind(e.view.element, model, kendo.mobile.ui);
+
         },
        
         validate: function () {

@@ -31,7 +31,7 @@
                                "SessionID": app.loginService.viewModel.get("SessionID").trim(), 
                                "Sequence": app.loginService.viewModel.get("Sequence").trim(),
                             "ClientIP":   app.ipAddress,
-                            "ClientID":   app.deviceID})
+                            "ClientID":   app.deviceID, "BuildNum":   app.buildNum})
                     }
                 },
                 schema: {

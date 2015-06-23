@@ -6,24 +6,26 @@
         "latitude": 43.65077,
         "longitude": -79.47848,
         "ATM": true,
-        "contacts": [
-            {
-                "label": "Telephone:",
-                "value": "(416) 763-6883"
-            },
-            {
-                "label": "Toll Free:",
-                "value": "1-800-461-5941"
-            },
-            {
-                "label": "Fax:",
-                "value": "(416) 763-4512"
-            },
-            {
-                "label": "Branch Manager:",
-                "value": "Pavlo Czerwoniak"
-            }
-        ],
+        "phone": {
+            "label": "Telephone:",
+            "link": "14167636883",
+            "value": "(416) 763-6883"
+        },
+        "tollfree": {
+            "label": "Toll Free:",
+            "link": "18004615941",
+            "value": "1-800-461-5941"
+        },
+        "fax": {
+            "label": "Fax:",
+            "link": "14167634512",
+            "value": "(416) 763-4512"
+        },
+        "manager": {
+            "label": "Branch Manager:",
+            "value": "Pavlo Czerwoniak"
+        },
+
         "hours": [
             {
                 "label": "Monday",
@@ -62,20 +64,26 @@
         "latitude": 43.63549,
         "longitude": -79.59779,
         "ATM": true,
-        "contacts": [
-            {
-                "label": "Telephone:",
-                "value": "(905) 238-1273"
-            },
-            {
-                "label": "Fax:",
-                "value": "(905) 238-1526"
-            },
-            {
-                "label": "Branch Manager:",
-                "value": "Roma Denderys"
-            }
-        ],
+        "phone": {
+            "label": "Telephone:",
+            "link": "19052381273",
+            "value": "(905) 238-1273"
+        },
+        "tollfree": {
+            "label": "",
+            "link": "",
+            "value": ""
+        }, 
+        "fax": {
+            "label": "Fax:",
+            "link": "19052381526",
+            "value": "(905) 238-1526"
+        },
+        "manager": {
+            "label": "Branch Manager:",
+            "value": "Roma Denderys"
+        },
+
         "hours": [
             {
                 "label": "Monday",
@@ -114,20 +122,26 @@
         "latitude": 43.52397,
         "longitude": -79.68199,
         "ATM": true,
-        "contacts": [
-            {
-                "label": "Telephone:",
-                "value": "(905) 363-2999"
-            },
-            {
-                "label": "Fax:",
-                "value": "(905) 363-2998"
-            },
-            {
-                "label": "Branch Manager:",
-                "value": "Josyf Pelech"
-            }
-        ],
+        "phone": {
+            "label": "Telephone:",
+            "link": "19053632999",
+            "value": "(905) 363-2999"
+        },
+        "tollfree": {
+            "label": "",
+            "link": "",
+            "value": ""
+        }, 
+        "fax": {
+            "label": "Fax:",
+            "link": "19053632998",
+            "value": "(905) 363-2998"
+        },
+        "manager": {
+            "label": "Branch Manager:",
+            "value": "Josyf Pelech"
+        },
+
         "hours": [
             {
                 "label": "Monday",
@@ -166,20 +180,26 @@
         "latitude": 43.79431,
         "longitude": -79.44607,
         "ATM": true,
-        "contacts": [
-            {
-                "label": "Telephone:",
-                "value": "(905) 707-8155"
-            },
-            {
-                "label": "Fax:",
-                "value": "(905) 707-5226"
-            },
-            {
-                "label": "Branch Manager:",
-                "value": "Borys Mykhaylets"
-            }
-        ],
+        "phone": {
+            "label": "Telephone:",
+            "link": "19057078155",
+            "value": "(905) 707-8155"
+        },
+        "tollfree": {
+            "label": "",
+            "link": "",
+            "value": ""
+        }, 
+        "fax": {
+            "label": "Fax:",
+            "link": "19057075226",
+            "value": "(905) 707-5226"
+        },
+        "manager": {
+            "label": "Branch Manager:",
+            "value": "Borys Mykhaylets"
+        },
+ 
         "hours": [
             {
                 "label": "Monday",
@@ -218,24 +238,25 @@
         "latitude": 43.24781,
         "longitude": -79.80679,
         "ATM": true,
-        "contacts": [
-            {
-                "label": "Telephone:",
-                "value": "(905) 544-7776"
-            },
-            {
-                "label": "Toll Free:",
-                "value": "1-877-859-8877"
-            },
-            {
-                "label": "Fax:",
-                "value": "(905) 545-9662"
-            },
-            {
-                "label": "Branch Manager:",
-                "value": "Stefania Barrios"
-            }
-        ],
+        "phone":{
+            "label": "Telephone:",
+            "link": "19055447776",
+            "value": "(905) 544-7776"
+        },
+        "tollfree": {
+            "label": "Toll Free:",
+            "link": "18778598877",
+            "value": "1-877-859-8877"
+        },
+        "fax": {
+            "label": "Fax:",
+            "link": "9055459662",
+            "value": "(905) 545-9662"
+        },
+        "manager": {
+            "label": "Branch Manager:",
+            "value": "Stefania Barrios"
+        },
         "hours": [
             {
                 "label": "Monday",
@@ -274,24 +295,25 @@
         "latitude": 45.39568,
         "longitude": -75.7122,
         "ATM": true,
-        "contacts": [
-            {
+        "phone": { 
                 "label": "Telephone:",
+                "link": "16137227075",
                 "value": "(613) 722-7075"
-            },
-            {
+        },
+        "tollfree": {
                 "label": "Toll Free:",
+                "link": "18005611682",
                 "value": "1-800-561-1682"
-            },
-            {
+        },
+        "fax": {
                 "label": "Fax:",
+                "link": "6137224206",
                 "value": "(613) 722-4206"
-            },
-            {
+        },
+        "manager": {
                 "label": "Branch Manager:",
                 "value": "Nadia Dubik Hawryshkewych"
-            }
-        ],
+        },
         "hours": [
             {
                 "label": "Monday",
@@ -330,12 +352,26 @@
         "latitude": 43.78861,
         "longitude": -79.24032,
         "ATM": true,
-        "contacts": [
-            {
-                "label": "Telephone:",
-                "value": ""
-            }
-        ],
+        "phone": {
+            "label": "Telephone:",
+            "link": "",
+            "value": ""
+        }, 
+        "tollfree": {
+            "label": "",
+            "link": "",
+            "value": ""
+        },
+        "fax": {
+            "label": "",
+            "link": "",
+            "value": ""
+        }, 
+        "manager": {
+            "label": "",
+            "link": "",
+            "value": ""
+        },
         "hours": [
             {
                 "label": "Wednesday",

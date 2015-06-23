@@ -69,13 +69,13 @@
             else if(rcErrCat === 14) {
             	if(errorCode === 1400) {
                     that.set("errorStr", "Login attempt <i>rejected</i>.");
-                    that.set("errorStr2", "<i>You have entered an invalid Card Number.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>You have entered an invalid Card Number.</i>");
                     that.set("errorStr3", "Click on \"Login\" to re-enter your login information.");                   
                     that.set("errorCancel", "Login");  
                 }
                 else if(errorCode === 1401) {
                     that.set("errorStr", "Login attempt <i>rejected</i>.");
-                    that.set("errorStr2", "<i>You have to entered a Card Number and password.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>You have to entered a Card Number and password.</i>");
                     that.set("errorStr3", "Click on \"Login\" to re-enter your login information.");                   
                     that.set("errorCancel", "Login");  
                 }
@@ -99,7 +99,7 @@
 				}
             	else {
                     that.set("errorStr", "Your transaction could <em>not</em> be completed.");
-                    that.set("errorStr2", "<i>Invalid amount.</i> ");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Invalid amount.</i> ");
                     that.set("errorCancel", "Continue");  
 				}
             }
@@ -128,13 +128,13 @@
             else if(rcErrCat === 31) {
             	if(errorCode === 3100 || errorCode === 3101 || errorCode === 3102 || errorCode === 3105 || errorCode === 3111) {            
                     that.set("errorStr", "Login attempt <i>rejected</i>.");
-                    that.set("errorStr2", "<i>Invalid Password.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Invalid Password.</i>");
                     that.set("errorStr3", "Click on \"Login\" to re-enter your login information.");
                     that.set("errorCancel", "Login");
                 }
             	else if(errorCode === 3104) {
                     that.set("errorStr", "Login attempt <i>rejected</i>.");
-                    that.set("errorStr2", "<i>Your home banking account is not active. Please contact your branch</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Your home banking account is not active. Please contact your branch</i>");
                     that.set("errorStr3", "Click on \"Login\" to try another account.");                   
                     that.set("errorCancel", "Login");  
                 }
@@ -151,16 +151,22 @@
                 }                
             	else if(errorCode === 3109) {
                     that.set("errorStr", "Login attempt <i>rejected</i>.");
-                    that.set("errorStr2", "<i>Password is too long.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Password is too long.</i>");
                     that.set("errorStr3", "Click on \"Login\" to re-enter your login information.");                   
                     that.set("errorCancel", "Login");  
                 }
             	else if(errorCode === 3112) {
                     that.set("errorStr", "Session error detected.");
-                    that.set("errorStr2", "<i>Restart the app and login again.</i>");                 
+                    that.set("errorStr2", "<i style='color:#CC9900'>Restart the app and login again.</i>");                 
                     that.set("errorCancel", "Login");  
                 }
-            	else {
+            	else if(errorCode === 3113) {
+                    that.set("errorStr", "Outdated app detected.");
+                    that.set("errorStr2", "<i style='color:#CC9900'>This version is no longer supported.</i>");        
+                    that.set("errorStr3", "Please update your app or <i>contact your branch</i>.<br />");
+                    that.set("errorCancel", "Cancel");  
+                }
+                else {
                     that.set("errorStr", "<i>Sorry...</i><br>The server is unavailable at the moment.");
                     that.set("errorStr2", "Please try again later.");                 
                     that.set("errorCancel", "Continue");  
@@ -168,20 +174,20 @@
             }
             else if(rcErrCat === 51) {
                 that.set("errorStr", "Your transaction could <i>not</i> be completed.");
-                that.set("errorStr2", "<i>Insufficient Funds.</i>");
+                that.set("errorStr2", "<i style='color:#CC9900'>Insufficient Funds.</i>");
                 that.set("errorBack", "Re-enter Transaction");
                 that.set("errorCancel", "Cancel");
             }
             else if(rcErrCat === 57) {
             	if(errorCode === 5702 || errorCode === 5703) {            
                     that.set("errorStr", "Your transaction could <i>not</i> be completed.");
-                    that.set("errorStr2", "<i>Transaction date is too far in the future.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Transaction date is too far in the future.</i>");
                     that.set("errorBack", "Re-enter Transaction");
                     that.set("errorCancel", "Cancel");
                 }
             	else if(errorCode === 5704) {
                     that.set("errorStr", "Your transaction could <i>not</i> be completed.");
-                    that.set("errorStr2", "<i>Bill Payments cannot be made unless your account address is complete.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Bill Payments cannot be made unless your account address is complete.</i>");
                     that.set("errorStr3", "Please contact your branch to have your address updated.");                   
                     that.set("errorCancel", "Continue");  
                 }
@@ -194,7 +200,7 @@
             else if(rcErrCat === 58) {
             	if(errorCode === 5802) {            
                     that.set("errorStr", "Your transaction could <i>not</i> be completed.");
-                    that.set("errorStr2", "<i>You have tried to enter a utility bill with a blank name or account number.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>You have tried to enter a utility bill with a blank name or account number.</i>");
                     that.set("errorStr3", "Select Back and re-enter incorrect values.");
                     that.set("errorBack", "Back");
                     that.set("errorCancel", "Cancel");
@@ -207,19 +213,19 @@
                 }
             	else if(errorCode === 5810) {            
                     that.set("errorStr", "Password Change <i>rejected</i>.");
-                    that.set("errorStr2", "<i>Password is too long.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Password is too long.</i>");
                     that.set("errorStr3", "Click on \"Back\" to re-enter your password information.");
                     that.set("errorBack", "Back");
                 }
             	else if(errorCode === 5811) {            
                     that.set("errorStr", "Password Change <i>rejected</i>.");
-                    that.set("errorStr2", "<i>Password was not verified properly.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>Password was not verified properly.</i>");
                     that.set("errorStr3", "Click on \"Back\" to re-enter your password information.");
                     that.set("errorBack", "Back");
                 }
             	else if(errorCode === 5812) {            
                     that.set("errorStr", "Password Change <i>rejected</i>.");
-                    that.set("errorStr2", "<i>New password must be different.</i>");
+                    that.set("errorStr2", "<i style='color:#CC9900'>New password must be different.</i>");
                     that.set("errorStr3", "Click on \"Back\" to re-enter your password information.");
                     that.set("errorBack", "Back");
                 }                

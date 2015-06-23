@@ -23,18 +23,21 @@
         return "http://dev.in2itive.ca";
     }
     
-    app.appType = "Dev";
+    app.appType = "Prod";
     app.ipAddress = "0";
     app.deviceID = "0";
     
+    // set the app build number here.  The gateway will enforce a minimum build number
+    app.buildNum = "1506.21.1";
+    
     app.getURL = function() {
         if(app.appType === "Dev") {
-            return "http://dev.in2itive.ca";
+            return "https://dev.in2itive.ca";
         }
         if(app.appType === "UAT") {
             return "http://66.252.148.81";
         }
-        return "https://dev.in2itive.ca";
+        return "https://mobile.bculink.ca";
     }
     
     app.openSettings = function (e) {
