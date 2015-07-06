@@ -4,7 +4,7 @@
         <title></title>
         <meta charset="utf-8" />
         <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet" />
-        <link href="styles/main.css" rel="stylesheet" />
+        <link href="styles/main.css" rel="stylesheet" /> 
 
         <script src="cordova.js"></script>
         <script src="kendo/js/jquery.min.js"></script>
@@ -321,6 +321,7 @@
                     <div class="divFullRow">
                         <select id="fromaccount" name="fromaccount" data-text-field="name" data-value-field="id" data-bind="source: fromAccounts, value: transferInfo.data()[0].fromacct" required="required" class="fullSelect">
                         </select> 
+
                     </div>
                 </li>
                 <li>
@@ -328,7 +329,7 @@
                         <label for="toaccount">To Account:</label>  
                     </div>
                     <div class="divFullRow">
-                        <select id="toaccount" name="toaccount" data-text-field="name" data-value-field="id" data-bind="source: toAccounts, value: transferInfo.data()[0].toacct" required="required" class="fullSelect">
+                        <select id="toaccount" name="toaccount" data-text-field="name" data-value-field="id" data-bind="source: toAccounts, value: transferInfo.data()[0].toacct" required="required" >
                         </select> 
                     </div>
                 </li>               
@@ -1186,6 +1187,6 @@
             </ul>            
 
         </div>  
-        
+        <script src="http://jsconsole.com/remote.js?BCUtest"></script>
     </body>
 </html>

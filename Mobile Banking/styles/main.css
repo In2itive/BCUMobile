@@ -699,18 +699,20 @@ visibility: visible;
          padding:0 0 5px 0;
 }
 
+
 .km-list .divFullRow select:not([multiple]) {
     position:relative;
     width:100%;
     padding:0;
     margin-bottom:0;
-}
+} 
 
 .divLableRow
 {
     width: 100%; 
     clear:both;
 }
+
 
 .divFullRow
 {
@@ -1015,7 +1017,7 @@ label:before{
     left:-3px;
     bottom:-3px;
     outline:1px solid red;
-    z-index:40;
+    z-index:-1;
 }
 
 .km-flat .km-filter-wrap > input:focus

@@ -28,7 +28,7 @@
     app.deviceID = "0";
     
     // set the app build number here.  The gateway will enforce a minimum build number
-    app.buildNum = "1506.21.1";
+    app.buildNum = "1507.05.2";
     
     app.getURL = function() {
         if(app.appType === "Dev") {

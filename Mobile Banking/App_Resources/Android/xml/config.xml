@@ -15,7 +15,7 @@
     </feature>
 
     <!-- For projects that target Apache Cordova 3.0 and later, comment out or delete the <plugins></plugins> block and its contents. -->
-    <plugins>
+    <!--plugins>
         <plugin name="App" value="org.apache.cordova.App"/>
         <plugin name="Geolocation" value="org.apache.cordova.GeoBroker"/>
         <plugin name="Device" value="org.apache.cordova.Device"/>
@@ -35,6 +35,6 @@
         <plugin name="Echo" value="org.apache.cordova.Echo" />
         <plugin name="Globalization" value="org.apache.cordova.Globalization"/>
         <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser"/>
-    </plugins>
+    </plugins-->
 </cordova>
 

@@ -3,7 +3,7 @@
         app = global.app = global.app || {};
     
     BankingTransferViewModel = kendo.observable({    
-        fromAccounts: [],
+        fromAccounts: [] ,
         toAccounts: [],
   
         transferInfo: new kendo.data.DataSource({
@@ -109,7 +109,7 @@
                 }
             },
             schema: {
-                model: {
+                model: { 
                     id: "id",
                     fields: {
                         id: { type: "string" },
@@ -118,7 +118,7 @@
                 }
             },
             change: function (e) {
-                //console.log(JSON.stringify(app.bankingTransferService.viewModel));
+                //console.log(JSON.stringify(this.view()));
                 app.bankingTransferService.viewModel.set("fromAccounts", this.view());
             }
         }),       

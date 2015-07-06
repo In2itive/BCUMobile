@@ -191,7 +191,7 @@
               error: function(xhr, textStatus, errorThrown){ app.ipAddress = "99.99.99.99" }
             });        
             
-            app.deviceID = device.uuid;
+            app.deviceID = 1234; //device.uuid;
         }
     });
     

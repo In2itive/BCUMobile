@@ -4,7 +4,7 @@
   "AppIdentifier": "com.buduchnist.mobilebanking",
   "ProjectName": "Mobile Banking",
   "IsRunnable": "true",
-  "FrameworkVersion": "3.7.0",
+  "FrameworkVersion": "3.8.0",
   "AndroidPermissions": [
     "android.permission.ACCESS_COARSE_LOCATION",
     "android.permission.ACCESS_FINE_LOCATION",
@@ -17,15 +17,11 @@
     "android.permission.WRITE_EXTERNAL_STORAGE"
   ],
   "CorePlugins": [
-    "com.telerik.mobiletesting",
     "org.apache.cordova.console",
     "org.apache.cordova.device",
-    "org.apache.cordova.device-motion",
     "org.apache.cordova.device-orientation",
-    "org.apache.cordova.dialogs",
     "org.apache.cordova.geolocation",
     "org.apache.cordova.globalization",
-    "org.apache.cordova.inappbrowser",
     "org.apache.cordova.network-information",
     "org.apache.cordova.splashscreen"
   ],
@@ -34,10 +30,10 @@
   ],
   "iOSStatusBarStyle": "Default",
   "AndroidHardwareAcceleration": "false",
-  "BundleVersion": "1.0",
+  "BundleVersion": "1.1",
   "DisplayName": "BCU Mobile Banking",
   "Author": "In2itive Enterprises Inc.",
-  "Description": "Mobile Banking V1.0",
+  "Description": "Mobile Banking V1.1",
   "Framework": "Cordova",
   "iOSDeviceFamily": [
     "1",
@@ -55,5 +51,6 @@
   "projectVersion": "1",
   "WP8WindowsPublisherName": "CN=Telerik",
   "WP8PackageIdentityName": "1234Telerik.com.buduchnist.mobilebanking",
-  "WPSdk": "8.0"
+  "WPSdk": "8.0",
+  "CordovaPluginVariables": {}
 }
